@@ -4,9 +4,24 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideRouterStore } from '@ngrx/router-store';
 import { provideEffects } from '@ngrx/effects';
-import { provideStore } from '@ngrx/store';
+import { provideState, provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
+import { provideHttpClient } from '@angular/common/http';
+import { boardReducer } from './state/board/board.reducer';
+import { BoardEffect } from './state/board/board.effects';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), provideRouterStore(), provideEffects(), provideStore(), provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() })]
+  providers: [
+    provideRouter(routes),
+    provideHttpClient(),
+    provideRouterStore(),
+    provideEffects(BoardEffect),
+    provideStore(),
+    provideState(
+      {
+        name: 'boards', reducer: boardReducer,
+      }
+    ),
+    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
+  ],
 };
