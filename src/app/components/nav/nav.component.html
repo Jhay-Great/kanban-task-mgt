@@ -14,20 +14,27 @@
 
 
 <section class="btns">
+    <!-- add new task -->
     <button>
         <img src="../../../assets/svgs/icon-add-task-mobile.svg" alt="add button svg icon">
         <p class="add-task">Add New Task</p>
     </button>
-    <button>
+
+    <!-- additional settings -->
+    <button (click)="toggleSettingsMenu()">
         <img src="../../../assets/svgs/icon-vertical-ellipsis.svg" alt="vertical ellipsis svg icon">
     </button>
+
     <!-- settings -->
-    <section class="settings">
-        <button class="edit-board">
-            Edit board
-        </button>
-        <button class="delete-board">
-            Delete board
-        </button>
-    </section>
+    @if(isActive) {
+        <section class="settings">
+            <button class="edit-board" (click)="editBoard()">
+                Edit board
+            </button>
+            <button class="delete-board" (click)="deleteBoard()">
+                Delete board
+            </button>
+        </section>
+
+    }
 </section>

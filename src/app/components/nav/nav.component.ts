@@ -10,5 +10,19 @@ import { Component } from '@angular/core';
 export class NavComponent {
 
   boardName:string = 'Platform Launch';
+  isActive:boolean = false;
+
+
+  toggleSettingsMenu () {
+    this.isActive = !this.isActive;
+  }
+
+  editBoard () {
+    this.isActive = false;
+  }
+
+  deleteBoard () {
+    this.isActive = false;
+  }
 
 }
