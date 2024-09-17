@@ -7,11 +7,12 @@ import { selectBoard } from './state/board/board.selector';
 import { createBoard, onLoadBoardData } from './state/board/board.action';
 import { NavComponent } from './components/nav/nav.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { BoardContainerComponent } from './components/board-container/board-container.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavComponent, SidebarComponent],
+  imports: [RouterOutlet, NavComponent, SidebarComponent, BoardContainerComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
