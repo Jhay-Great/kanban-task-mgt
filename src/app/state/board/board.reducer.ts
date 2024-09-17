@@ -17,6 +17,16 @@ import { createEntityAdapter } from "@ngrx/entity";
 import { EntityState } from "@ngrx/entity";
 
 
+// creating an adapter
+export const boardAdapter = createEntityAdapter<IBoard>();
+
+// creating an entity interface
+export interface BoardState extends EntityState<IBoard> {};
+
+// creates an initial state using the entity adapter
+export const initialBoard:BoardState = boardAdapter.getInitialState({});
+ 
+
 const initialValue:IBoard[] = []
 
 // const initialValue:IBoard[] = {
@@ -29,6 +39,12 @@ const initialValue:IBoard[] = []
 // }
 
 export const boardReducer = createReducer(
+    initialBoard,
+    on(onLoadBoardData, (state) => state),
+    on(onLoadBoardSuccess, (state, { board }) => boardAdapter.setAll(board, state))
+)
+
+export const _boardReducer = createReducer(
     initialValue,
     on(onLoadBoardData, (state) => state),
     on(onLoadBoardSuccess, (state, {board}) => {
@@ -36,5 +52,4 @@ export const boardReducer = createReducer(
         console.log('reducer: ', board);
         return board;
     }),
-    // on(onLoadBoardSuccess, (state, {data}) => ({ ...state, data})),
 )
