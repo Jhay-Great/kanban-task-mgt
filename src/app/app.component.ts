@@ -11,25 +11,17 @@ import { onLoadBoardData } from './state/board/board.action';
   standalone: true,
   imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
   title = 'kanban';
 
-  constructor (
-    private boardService: BoardService,
-    private store: Store<AppState>
-  ) { }
+  constructor(private store: Store<AppState>) {}
 
   ngOnInit(): void {
-    // this.boardService.fetch().subscribe(
-    //   value => [value].map(v => console.log(v))
-    //   // value => value.map(v => console.log(v))
-    //   // val => console.log(val),
-    // )
     this.store.dispatch(onLoadBoardData()),
-    this.store.select(selectBoard).subscribe(
-      value => console.log('boards: ', value),
-    )
+      this.store
+        .select(selectBoard)
+        .subscribe((value) => console.log('boards: ', value));
   }
 }
