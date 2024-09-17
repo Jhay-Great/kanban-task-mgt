@@ -5,26 +5,13 @@
 .app-controls {
     @include mix.flex();
 
-    .logo-symbol {
-        width: func.pixelsToRem(30);
-        aspect-ratio: 1;
-        @include mix.flex();
-        
-    
-        & > .bars {
-            height: 100%;
-            flex: 1;
-            border-radius: 2px;
+    .logo {
+        display: block;
+    }
 
-            &.b1 {
-                background-color: var.$color-main-purple;
-            }
-            &.b2 {
-                background-color: func.addTransparency(var.$color-main-purple, 75%);
-            }
-            &.b3 {
-                background-color: func.addTransparency(var.$color-main-purple, 50%);
-            }
+    @media screen and (min-width: 760px) {
+        .logo {
+            display: none;
         }
     }
     
@@ -49,6 +36,14 @@
 
         }
 
+    }
+
+    .add-task {
+        display: none;
+
+        @media screen and (min-width: 760px) {
+            display: block;
+        }
     }
 
     .settings {
@@ -94,3 +89,5 @@
 //     color: black;
 //     box-shadow: 0 0 8px 2px;
 // }
+
+

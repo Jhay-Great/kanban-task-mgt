@@ -27,17 +27,26 @@ app-root {
         align-items: center;
         height: func.pixelsToRem(100);
         padding: 1.5rem;
-        grid-column: 2/3;
+        grid-column: 1/-1;
         background-color: var.$color-white;
         border-bottom: 1px solid var.$color-medium-gray-v2;
+
+        @media screen and (min-width: 760px) {
+            grid-column: 2/3;
+        }
     }
-    
+
     app-sidebar {
+        display: none; // NOTE: hides the side bar on mobile view
         width: func.pixelsToRem(300);
         grid-column: 1/2;
         grid-row: 1;
         background-color: var.$color-white;
         border-right: 1px solid var.$color-medium-gray-v2;
+        
+        @media screen and (min-width: 760px) {
+            display: block; //NOTE: displays the side bar on large screens
+        }
     
     }
 }
@@ -51,3 +60,9 @@ button {
     border: 1px solid transparent;
     cursor: pointer;
 }
+
+// @media screen and (min-width: 760px) {
+//     .logo {
+//         display: none;
+//     }
+// }
