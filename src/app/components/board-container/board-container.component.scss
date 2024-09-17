@@ -1,0 +1,9 @@
+@use '../../../sass/variables' as var;
+@use '../../../sass/mixins' as mix;
+@use '../../../sass/functions' as func;
+
+.empty-board {
+    @include mix.headerL;
+    color: var.$color-medium-gray;
+
+}

@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
-// import { }
+// import { BoardContainerComponent } from './components/board-container/board-container.component';
 
 export const routes: Routes = [
-    // {
-    //     path: '',
-    //     loadChildren: () => import('').then(c => )
-    // }
+    {
+        path: '',
+        loadChildren: () => import('./components/board-container/board-container.component').then((c) => c.BoardContainerComponent),
+    }
 ];

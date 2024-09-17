@@ -54,6 +54,9 @@ app-root {
 
     app-board-container {
         grid-area: board;
+        @include mix.flex();
+        justify-content: center;
+        align-items: center;
     }
 }
 
