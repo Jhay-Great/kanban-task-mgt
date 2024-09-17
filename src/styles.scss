@@ -52,11 +52,18 @@ app-root {
     
     }
 
-    app-board-container {
+    // app-board-container,
+    .board-space {
         grid-area: board;
         @include mix.flex();
         justify-content: center;
         align-items: center;
+    }
+
+    .empty-board {
+        @include mix.headerL;
+        color: var.$color-medium-gray;
+    
     }
 }
 

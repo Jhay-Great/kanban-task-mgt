@@ -5,7 +5,7 @@
 
 <section class="board-list">
 @for (board of boards$ | async; track $index) {
-        <button>
+        <button [routerLink]="['/board', board.id]">
             <img src="../../../assets/svgs/icon-board.svg" alt="board icon svg">
             <p>
                 {{ board.name }}

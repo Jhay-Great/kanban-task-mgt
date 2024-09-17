@@ -5,11 +5,12 @@ import { selectBoard } from '../../state/board/board.selector';
 import { Observable } from 'rxjs';
 import { IBoard } from '../../model/board.interface';
 import { AsyncPipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-board-list',
   standalone: true,
-  imports: [AsyncPipe],
+  imports: [AsyncPipe, RouterLink],
   templateUrl: './board-list.component.html',
   styleUrl: './board-list.component.scss'
 })
