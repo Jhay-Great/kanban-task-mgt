@@ -1,0 +1,38 @@
+@use '../../../sass/variables' as var;
+@use '../../../sass/mixins' as mix;
+@use '../../../sass/functions' as func;
+
+.number-of-boards {
+    @include mix.headerS;
+    color: var.$color-medium-gray;
+    text-transform: uppercase;
+    padding: 1rem 1.5rem;
+
+}
+
+.board-list {
+    width: 90%;
+    height: fit-content;
+
+    button {
+        width: 100%;
+        height: fit-content;
+        padding: 1rem 1.5rem;
+        @include mix.headerM;
+        @include mix.buttons(var.$color-medium-gray);
+        justify-content: initial;
+        transition: all 400ms ease-out;
+        
+        &:hover {
+            // @include mix.buttons(_, var.$color-medium-gray);
+            @include mix.secondary-button-idle-hover;
+            transition: all 400ms ease-in;
+
+        }
+        
+        .active {
+            @include mix.buttons(_, var.$color-main-purple);
+        }
+    }
+    
+}

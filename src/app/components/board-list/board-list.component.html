@@ -1,13 +1,16 @@
 <!-- current number of boards -->
 <p class="number-of-boards">
-    All boards <span> (3) </span>
+    All boards <span> ({{(boards$ | async)?.length}}) </span>
 </p>
 
 <section class="board-list">
-    <button>
-        <img src="" alt="">
-        <p>
-            Name of board
-        </p>
-    </button>
+@for (board of boards$ | async; track $index) {
+        <button>
+            <img src="../../../assets/svgs/icon-board.svg" alt="board icon svg">
+            <p>
+                {{ board.name }}
+            </p>
+        </button>
+        
+    }
 </section>

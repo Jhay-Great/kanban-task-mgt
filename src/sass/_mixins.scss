@@ -16,14 +16,21 @@
 
 @mixin headerL {
     @include font-default(bold);
-    font-size: func.pixelsToRem(15);
-    line-height: func.pixelsToRem(19);
+    font-size: func.pixelsToRem(18);
+    line-height: func.pixelsToRem(23);
 }
 
 @mixin headerM {
     @include font-default(bold);
+    font-size: func.pixelsToRem(15);
+    line-height: func.pixelsToRem(19);
+}
+
+@mixin headerS {
+    @include font-default(bold);
     font-size: func.pixelsToRem(12);
     line-height: func.pixelsToRem(15);
+    letter-spacing: func.pixelsToRem(2);
 }
 
 @mixin bodyM {
@@ -77,11 +84,13 @@
 }
 
 @mixin secondary-button-idle-hover {
-    background-color: func.addTransparency(var.$color-main-purple);
+    background-color: func.addTransparency(var.$color-main-purple, 25%);
+    color: var.$color-main-purple;
 }
 
 @mixin button-destructive-hover {
-    background-color: func.addTransparency(var.$color-main-purple);
+    background-color: var.$color-light-red;
+    color: var.$color-white;
 }
 
 // flex
