@@ -1,0 +1,17 @@
+@use '../../../sass/variables' as var;
+@use '../../../sass/mixins' as mix;
+@use '../../../sass/functions' as func;
+
+.btns {
+    @include mix.flex();
+    
+    button:first-child {
+        height: func.pixelsToRem(48);
+        border-radius: func.pixelsToRem(24);
+        @include mix.buttons(_, var.$color-purple-light);
+        padding: func.pixelsToRem(15) 1.5rem;
+
+    }
+
+
+}

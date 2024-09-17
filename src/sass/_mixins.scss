@@ -40,7 +40,7 @@
 @mixin buttons ($color: var.$color-white, $bg: var.$transparent) {
     border: 1px solid transparent;
     color: $color;
-    background: $bg;
+    background: $bg; 
 }
 @mixin primary-button-idle {
     background-color: var.$color-main-purple;
