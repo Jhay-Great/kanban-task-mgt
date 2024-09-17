@@ -21,6 +21,7 @@
         @include mix.headerM;
         @include mix.buttons(var.$color-medium-gray);
         justify-content: initial;
+        border-radius: 0 50px 50px 0;
         transition: all 400ms ease-out;
         
         &:hover {
@@ -32,6 +33,25 @@
         
         .active {
             @include mix.buttons(_, var.$color-main-purple);
+        }
+    }
+
+    .add-new-board {
+        color: var.$color-main-purple;
+
+        svg path {
+            fill: var.$color-main-purple;
+        }
+        
+        div {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+
+            svg {
+                fill: var.$color-main-purple;
+
+            }
         }
     }
     
