@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { IBoard } from '../../model/board.interface';
-import { onLoadBoardData, onLoadBoardSuccess } from './board.action';
+import { createBoard, deleteBoard, onLoadBoardData, onLoadBoardSuccess } from './board.action';
 
 // entities
 /**
@@ -30,5 +30,7 @@ export const boardReducer = createReducer(
   on(onLoadBoardData, (state) => state),
   on(onLoadBoardSuccess, (state, { board }) =>
     boardAdapter.setAll(board, state)
-  )
+  ),
+  on(createBoard, (state, {board}) => boardAdapter.addOne(board, state)),
+  on(deleteBoard, (state, { id }) => boardAdapter.removeOne(id, state)),
 );
