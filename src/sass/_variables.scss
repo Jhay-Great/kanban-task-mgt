@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+
 // colors
 $color-main-purple: #635FC7;
 $color-purple-light: #A8A4FF;
@@ -6,10 +8,14 @@ $color-very-dark-gray: #20212C;
 $color-dark-gray: #2B2C37;
 $color-dark-gray-v1: #3E3F4E;
 $color-medium-gray: #828FA3;
-$color-light-gray: #E4EBFA;
+$color-medium-gray-v2: #E4EBFA;
+$color-light-gray: #F4F7FD;
+$color-white: #fff;
+$color-red: #ea5555;
+$color-light-red: #ff9898;
 
 // font family
-
+$font-jakarta-sans: "Plus Jakarta Sans", sans-serif;
 
 // font size
 $x-large: 24px;

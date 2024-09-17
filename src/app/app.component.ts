@@ -5,11 +5,13 @@ import { AppState } from './model/AppState';
 import { Store } from '@ngrx/store';
 import { selectBoard } from './state/board/board.selector';
 import { createBoard, onLoadBoardData } from './state/board/board.action';
+import { NavComponent } from './components/nav/nav.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, NavComponent, SidebarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

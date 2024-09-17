@@ -1,0 +1,67 @@
+@use './variables' as var;
+@use './functions' as func;
+
+@mixin font-default($weight) {
+    font-weight: $weight;
+    font-family: var.$font-jakarta-sans;
+}
+
+@mixin headerXl {
+    @include font-default(bold);
+    font-size: func.$pixelsToRem(24);
+    line-height: func.$pixelsToRem(30);
+}
+
+@mixin headerL {
+    @include font-default(bold);
+    font-size: func.$pixelsToRem(15);
+    line-height: func.$pixelsToRem(19);
+}
+
+@mixin headerM {
+    @include font-default(bold);
+    font-size: func.$pixelsToRem(12);
+    line-height: func.$pixelsToRem(15);
+}
+
+@mixin bodyM {
+    @include font-default(medium);
+    font-size: func.$pixelsToRem(13);
+    line-height: func.$pixelsToRem(23);
+}
+
+@mixin bodyM {
+    @include font-default(bold);
+    font-size: func.$pixelsToRem(12);
+    line-height: func.$pixelsToRem(15);
+}
+
+// buttons
+@mixin primary-button-idle {
+    background-color: var.$color-main-purple;
+    color: var.$color-white;
+}
+
+@mixin secondary-button-idle {
+    background-color: func.addTransparency(var.$color-main-purple, 10);
+    color: var.$color-main-purple;
+
+}
+
+@mixin button-destructive {
+    background-color: var.$color-red;
+    color: var.$color-white;
+}
+
+// button hover
+@mixin primary-button-idle-hover {
+    background-color: var.$color-purple-light;
+}
+
+@mixin secondary-button-idle-hover {
+    background-color: func.addTransparency(var.$color-main-purple);
+}
+
+@mixin button-destructive-hover {
+    background-color: func.addTransparency(var.$color-main-purple);
+}

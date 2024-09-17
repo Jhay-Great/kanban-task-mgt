@@ -1,0 +1,7 @@
+@function pixelsToRem ($size) {
+    @return math.div($size, 16) + rem;
+}
+
+@function addTransparency($base-color, $transparency-level) {
+    @return rgba($base-color, $transparency-level);
+  }
