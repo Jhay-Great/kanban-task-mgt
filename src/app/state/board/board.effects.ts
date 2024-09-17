@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { BoardService } from '../../services/board.service';
-import { onLoadBoardData, onLoadBoardSuccess } from './board.action';
-import { map, mergeMap, tap } from 'rxjs';
+import { onLoadBoardData, onLoadBoardFailure, onLoadBoardSuccess } from './board.action';
+import { catchError, map, mergeMap, of, tap } from 'rxjs';
 import { v4 as uuid } from 'uuid';
 
 @Injectable()
@@ -21,7 +21,11 @@ export class BoardEffect {
           tap((data) => {
             console.log('logging from tap: ', data);
           }),
-          map((data) => onLoadBoardSuccess({ board: data }))
+          map((data) => onLoadBoardSuccess({ board: data })),
+          catchError((error) => {
+            console.log(error);
+            return of(onLoadBoardFailure({error: error.message}));
+          })
         )
       )
     )
