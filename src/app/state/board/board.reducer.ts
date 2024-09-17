@@ -25,18 +25,6 @@ export interface BoardState extends EntityState<IBoard> {};
 
 // creates an initial state using the entity adapter
 export const initialBoard:BoardState = boardAdapter.getInitialState({});
- 
-
-const initialValue:IBoard[] = []
-
-// const initialValue:IBoard[] = {
-//     name: '',
-//     columns: [],
-//     // data: { boards: [] },
-//     // loading: false,
-//     // error: ''
-
-// }
 
 export const boardReducer = createReducer(
     initialBoard,
@@ -44,6 +32,7 @@ export const boardReducer = createReducer(
     on(onLoadBoardSuccess, (state, { board }) => boardAdapter.setAll(board, state))
 )
 
+const initialValue:IBoard[] = []
 export const _boardReducer = createReducer(
     initialValue,
     on(onLoadBoardData, (state) => state),
