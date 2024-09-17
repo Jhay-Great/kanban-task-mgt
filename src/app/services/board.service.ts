@@ -14,6 +14,7 @@ export class BoardService {
   constructor(private http: HttpClient) {}
 
   fetch() {
+    // console.log('fetchiing...')
     return this.http.get<{ boards: IBoard[] }>(this.localApi);
   }
 }

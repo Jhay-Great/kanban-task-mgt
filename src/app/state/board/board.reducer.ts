@@ -31,6 +31,6 @@ export const boardReducer = createReducer(
   on(onLoadBoardSuccess, (state, { board }) =>
     boardAdapter.setAll(board, state)
   ),
-  on(createBoard, (state, {board}) => boardAdapter.addOne(board, state)),
+  on(createBoard, (state, {board}) => (console.log('called...'), boardAdapter.addOne(board, state))),
   on(deleteBoard, (state, { id }) => boardAdapter.removeOne(id, state)),
 );

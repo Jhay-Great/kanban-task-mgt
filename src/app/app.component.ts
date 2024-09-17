@@ -4,7 +4,7 @@ import { BoardService } from './services/board.service';
 import { AppState } from './model/AppState';
 import { Store } from '@ngrx/store';
 import { selectBoard } from './state/board/board.selector';
-import { onLoadBoardData } from './state/board/board.action';
+import { createBoard, onLoadBoardData } from './state/board/board.action';
 
 @Component({
   selector: 'app-root',
@@ -23,5 +23,19 @@ export class AppComponent implements OnInit {
       this.store
         .select(selectBoard)
         .subscribe((value) => console.log('boards: ', value));
+    
+
+    // const data = {
+    //   name: 'something',
+    //   id: '39sskls3',
+    //   columns: [
+    //     {
+    //       name: 'going out',
+    //       tasks: [],
+    //     }
+    //   ]
+    // }
+    // this.store.dispatch(createBoard({board: data}));
+    // this.store.select(selectBoard).subscribe(val => console.log('second log: ', val));
   }
 }
