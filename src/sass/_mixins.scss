@@ -11,6 +11,7 @@
     @include font-default(bold);
     font-size: func.pixelsToRem(24);
     line-height: func.pixelsToRem(30);
+    color: var.$color-black;
 }
 
 @mixin headerL {

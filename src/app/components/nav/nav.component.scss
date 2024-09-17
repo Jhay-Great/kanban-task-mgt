@@ -5,7 +5,7 @@
 .app-controls {
     @include mix.flex();
 
-    .logo {
+    .logo-symbol {
         width: func.pixelsToRem(30);
         aspect-ratio: 1;
         @include mix.flex();

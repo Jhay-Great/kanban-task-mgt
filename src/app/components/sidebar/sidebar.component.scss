@@ -1,0 +1,16 @@
+@use '../../../sass/variables' as var;
+@use '../../../sass/mixins' as mix;
+@use '../../../sass/functions' as func;
+
+.logo {
+    @include mix.flex();
+    height: func.pixelsToRem(100);
+    align-items: center;
+    padding-left: 2rem;
+    
+
+    .logo-name {
+        @include mix.headerXl;
+    }
+}
+
