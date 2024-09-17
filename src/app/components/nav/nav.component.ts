@@ -9,4 +9,6 @@ import { Component } from '@angular/core';
 })
 export class NavComponent {
 
+  boardName:string = 'Platform Launch';
+
 }

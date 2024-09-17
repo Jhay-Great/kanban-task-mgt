@@ -30,13 +30,18 @@
     line-height: func.$pixelsToRem(23);
 }
 
-@mixin bodyM {
+@mixin bodyS {
     @include font-default(bold);
     font-size: func.$pixelsToRem(12);
     line-height: func.$pixelsToRem(15);
 }
 
 // buttons
+@mixin buttons ($color: var.$color-white, $bg: var.$transparent) {
+    border: 1px solid transparent;
+    color: $color;
+    background: $bg;
+}
 @mixin primary-button-idle {
     background-color: var.$color-main-purple;
     color: var.$color-white;

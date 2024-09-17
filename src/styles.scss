@@ -1,1 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
+@use 'sass/variables' as var;
+@use 'sass/mixins' as mix;
+@use 'sass/functions' as func;
+@use 'sass/theme' as theme;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    height: 100dvh;
+    background-color: var.$color-light-gray;
+}
+app-nav {
+    height: func.pixelsToRem(80);
+    padding: 2rem 2.5rem;
+}
+
+app-sidebar {
+    width: func.pixelsToRem(300);
+
+}
+
+button {
+    @include mix.buttons();
+}
