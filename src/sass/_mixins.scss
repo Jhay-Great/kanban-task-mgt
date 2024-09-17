@@ -70,3 +70,17 @@
 @mixin button-destructive-hover {
     background-color: func.addTransparency(var.$color-main-purple);
 }
+
+// flex
+@mixin flex ($direction: row, $gap: 1rem) {
+    display: flex;
+    flex-direction: $direction;
+    gap: $gap;
+}
+
+// grid
+@mixin grid () {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    grid-template-rows: 100%;
+}
