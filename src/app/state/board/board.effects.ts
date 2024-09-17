@@ -12,7 +12,20 @@ export class BoardEffect {
             ofType(onLoadBoardData),
             mergeMap(() => 
                 this.boardService.fetch().pipe(
-                    map(data => onLoadBoardSuccess({boards: data})),
+                    map(res =>
+                        res.boards.map(board =>({
+                            ...board,
+                            id: uuid()
+                        }))
+                    ),
+                    tap(data => {
+                        console.log('logging from tap: ', data)
+                    }),
+                    map(data => onLoadBoardSuccess({board: data})),
+                    // tap(data => {
+                    //     console.log(data.boards.map(data => console.log(data)));
+                    //     // data.boards[0]
+                    // })
                 )
             )
         )

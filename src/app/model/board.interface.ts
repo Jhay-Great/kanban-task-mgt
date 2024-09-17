@@ -1,8 +1,7 @@
-export interface IBoard {
-    boards: ISubBoard[];
-}
 
-export interface ISubBoard {
+
+export interface IBoard {
+    id: string,
     name: string,
     columns: IColumns[],
 }

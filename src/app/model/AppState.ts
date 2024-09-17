@@ -1,4 +1,4 @@
-import { IBoard } from "./board.interface";
+import { IBoard, } from "./board.interface";
 
 export interface AppState {
     boards: IBoard[];

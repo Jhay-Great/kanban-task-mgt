@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IBoard, ISubBoard } from '../model/board.interface';
+import { IBoard, } from '../model/board.interface';
 import { environment } from '../../environments/environment';
+import { Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,7 @@ export class BoardService {
   ) { }
 
   fetch () {
-    return this.http.get<ISubBoard[]>(this.localApi);
+    return this.http.get<{boards: IBoard[]}>(this.localApi);
+    
   }
 }

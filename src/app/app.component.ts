@@ -23,7 +23,9 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     // this.boardService.fetch().subscribe(
-    //   val => console.log(val),
+    //   value => [value].map(v => console.log(v))
+    //   // value => value.map(v => console.log(v))
+    //   // val => console.log(val),
     // )
     this.store.dispatch(onLoadBoardData()),
     this.store.select(selectBoard).subscribe(
