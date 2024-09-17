@@ -1,8 +1,19 @@
 
-<!-- board name -->
-<p>
-    {{ boardName }}
-</p>
+<!-- logo -->
+<section class="app-controls">
+    <div class="logo">
+        <div class="bars b1"></div>
+        <div class="bars b2"></div>
+        <div class="bars b3"></div>
+    </div>
+    
+    <!-- board name -->
+    <p class="board-name">
+        {{ boardName }}
+    </p>
+
+</section>
+
 
 <section class="btns">
     <button>
@@ -12,4 +23,13 @@
     <button>
         <img src="../../../assets/svgs/icon-vertical-ellipsis.svg" alt="vertical ellipsis svg icon">
     </button>
+    <!-- settings -->
+    <section class="settings">
+        <button class="edit-board">
+            Edit board
+        </button>
+        <button class="delete-board">
+            Delete board
+        </button>
+    </section>
 </section>

@@ -1,3 +1,4 @@
+@use 'sass:math';
 @use './variables' as var;
 @use './functions' as func;
 
@@ -8,40 +9,51 @@
 
 @mixin headerXl {
     @include font-default(bold);
-    font-size: func.$pixelsToRem(24);
-    line-height: func.$pixelsToRem(30);
+    font-size: func.pixelsToRem(24);
+    line-height: func.pixelsToRem(30);
 }
 
 @mixin headerL {
     @include font-default(bold);
-    font-size: func.$pixelsToRem(15);
-    line-height: func.$pixelsToRem(19);
+    font-size: func.pixelsToRem(15);
+    line-height: func.pixelsToRem(19);
 }
 
 @mixin headerM {
     @include font-default(bold);
-    font-size: func.$pixelsToRem(12);
-    line-height: func.$pixelsToRem(15);
+    font-size: func.pixelsToRem(12);
+    line-height: func.pixelsToRem(15);
 }
 
 @mixin bodyM {
     @include font-default(medium);
-    font-size: func.$pixelsToRem(13);
-    line-height: func.$pixelsToRem(23);
+    font-size: func.pixelsToRem(13);
+    line-height: func.pixelsToRem(23);
 }
 
 @mixin bodyS {
     @include font-default(bold);
-    font-size: func.$pixelsToRem(12);
-    line-height: func.$pixelsToRem(15);
+    font-size: func.pixelsToRem(12);
+    line-height: func.pixelsToRem(15);
 }
 
 // buttons
 @mixin buttons ($color: var.$color-white, $bg: var.$transparent) {
-    border: 1px solid transparent;
     color: $color;
     background: $bg; 
 }
+@mixin button-fonts($size, $weight) {
+    font-weight: $weight;
+  
+    // Check if the size has a 'rem' unit, otherwise convert from 'px' to 'rem'
+    @if unit($size) == 'rem' {
+      font-size: $size;
+    } @else {
+      font-size: math.div($size, 16) * 1rem;
+    }
+  }
+  
+
 @mixin primary-button-idle {
     background-color: var.$color-main-purple;
     color: var.$color-white;
@@ -72,10 +84,10 @@
 }
 
 // flex
-@mixin flex ($direction: row, $gap: 1rem) {
+@mixin flex ($direction: row, $gap: 1) {
     display: flex;
     flex-direction: $direction;
-    gap: $gap;
+    gap: $gap + rem;
 }
 
 // grid

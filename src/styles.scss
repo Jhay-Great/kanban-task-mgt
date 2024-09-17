@@ -48,5 +48,6 @@ button {
     @include mix.flex();
     justify-content: space-between;
     align-items: center;
+    border: 1px solid transparent;
     cursor: pointer;
 }
