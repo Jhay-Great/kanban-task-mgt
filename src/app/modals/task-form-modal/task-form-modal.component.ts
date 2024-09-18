@@ -1,5 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../model/AppState';
 
 @Component({
   selector: 'app-task-form-modal',
@@ -14,6 +16,7 @@ export class TaskFormModalComponent implements OnInit, OnDestroy {
 
   constructor (
     private fb: FormBuilder,
+    private store: Store<AppState>,
   ) {};
 
   ngOnInit(): void {
@@ -58,6 +61,18 @@ export class TaskFormModalComponent implements OnInit, OnDestroy {
 
   removeSubTask (index:number) {
     this.subTaskArray.removeAt(index)
+  }
+
+  createTask () {
+    const form = this.taskForm;
+    if (form.invalid) return;
+
+    const data = form.value;
+    console.log(data);
+    // dispatch action and payload
+    // this.store.dispatch(createTask())
+
+
   }
 
 
