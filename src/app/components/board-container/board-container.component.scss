@@ -2,4 +2,12 @@
 @use '../../../sass/mixins' as mix;
 @use '../../../sass/functions' as func;
 
-
+.empty-container {
+    @include mix.flex(column, 2);
+    justify-content: center;
+    align-items: center;
+    
+}
+.add-column {
+    @include mix.add-button-primary;
+}

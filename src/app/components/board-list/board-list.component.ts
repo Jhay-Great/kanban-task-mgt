@@ -37,7 +37,7 @@ export class BoardListComponent implements OnInit {
     })
   }
 
-  get columnFormArray () {
+  get columnFormArray (): FormArray {
     return this.form.get('columns') as FormArray;
   }
 
@@ -55,9 +55,19 @@ export class BoardListComponent implements OnInit {
     this.columnFormArray.removeAt(index);
   }
 
+  clearForm () {
+    this.columnFormArray.reset();
+  }
+
   submit() {
+    if (!this.form.valid) {
+      console.log('form is invalid');
+      return;
+    }
+
     const board = this.form.value;
     this.store.dispatch(createBoard({board}));
+    this.clearForm();
   }
 
   createNewBoard () {

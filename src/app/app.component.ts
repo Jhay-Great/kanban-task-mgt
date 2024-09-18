@@ -27,18 +27,5 @@ export class AppComponent implements OnInit {
         .select(selectBoard)
         .subscribe((value) => console.log('boards: ', value));
     
-
-    // const data = {
-    //   name: 'something',
-    //   id: '39sskls3',
-    //   columns: [
-    //     {
-    //       name: 'going out',
-    //       tasks: [],
-    //     }
-    //   ]
-    // }
-    // this.store.dispatch(createBoard({board: data}));
-    // this.store.select(selectBoard).subscribe(val => console.log('second log: ', val));
   }
 }

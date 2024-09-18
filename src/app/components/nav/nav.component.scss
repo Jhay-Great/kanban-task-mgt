@@ -25,16 +25,17 @@
     position: relative;
     
     & > button:first-child {
-        height: func.pixelsToRem(48);
-        border-radius: func.pixelsToRem(24);
-        padding: func.pixelsToRem(15) 1.5rem;
-        @include mix.buttons(_, var.$color-main-purple);
-        transition: all 300ms ease-in-out;
+        @include mix.add-button-primary;
+        // height: func.pixelsToRem(48);
+        // border-radius: func.pixelsToRem(24);
+        // padding: func.pixelsToRem(15) 1.5rem;
+        // @include mix.buttons(_, var.$color-main-purple);
+        // transition: all 300ms ease-in-out;
         
-        &:hover {
-            @include mix.buttons(_, var.$color-purple-light);
+        // &:hover {
+        //     @include mix.buttons(_, var.$color-purple-light);
 
-        }
+        // }
 
     }
 
