@@ -8,3 +8,8 @@ const { selectAll, selectIds, selectEntities, selectTotal } =
 const featureBoard = createFeatureSelector<AppState, BoardState>('boards');
 
 export const selectBoard = createSelector(featureBoard, selectAll);
+// dispatch an action with the id and select the entity collection or the board based on the id dispatched to the store
+export const selectColumns = createSelector(
+  featureBoard, 
+  () => selectAll
+)

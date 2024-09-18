@@ -22,6 +22,7 @@ export class BoardContainerComponent implements OnInit {
   ) {};
 
   ngOnInit(): void {
-    this.columns = this.store.select()
+    // selects the columns
+    // this.columns = this.store.select()
   }
 }
