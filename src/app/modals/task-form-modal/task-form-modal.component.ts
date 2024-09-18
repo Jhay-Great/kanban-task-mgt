@@ -29,4 +29,36 @@ export class TaskFormModalComponent implements OnInit, OnDestroy {
     
   }
 
+  get subTaskArray () {
+    return this.taskForm.get('subtask') as  FormArray;
+  }
+
+  get statusArray () {
+    return this.taskForm.get('status') as FormArray;
+  }
+
+  addSubTask (): void {
+    const element = this.fb.group({
+      title: ['', Validators.required],
+      isCompleted: [false],
+    })
+    this.subTaskArray.push(element)
+  }
+
+  selectStatus ():void {
+    const element = this.fb.group({
+      status: [''],
+    });
+    this.statusArray.push(element)
+  }
+
+  clear ():void {
+    this.taskForm.reset();
+  }
+
+  removeSubTask (index:number) {
+    this.subTaskArray.removeAt(index)
+  }
+
+
 }
