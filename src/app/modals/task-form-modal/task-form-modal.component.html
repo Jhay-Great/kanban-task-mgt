@@ -2,42 +2,48 @@
     Add New Task
 </h2>
 
-<form>
-    <div class="title">
+<form [formGroup]="taskForm" (ngSubmit)="createTask()">
+    <section class="title">
         <label for="title">Title</label>
-        <input type="text" placeholder="e.g. Take coffee break">
-    </div>
+        <input type="text" placeholder="e.g. Take coffee break" formControlName="title">
+    </section>
 
-    <div class="description">
+    <section class="description">
         <label for="description">Description</label>
-        <input type="text" placeholder="e.g. It's always good to take a break. This 15 minute break will recharge the batteries a little.">
-    </div>
+        <input type="text" placeholder="e.g. It's always good to take a break. This 15 minute break will recharge the batteries a little." formControlName="description">
+    </section>
 
-    <div class="subtask-container">
+    <section class=" ">
         <label for="subtask-label">
             Subtasks
         </label>
-        <div>
-            <input type="text">
-            <button>
-                x
-            </button>
+        <div class="subtask-container" formArrayName="subtask">
+            @for (subTask of subTaskArray.controls; track $index) {
+                <div [formGroupName]="$index">
+                    <input type="text" formControlName="title">
+                    <button (click)="removeSubTask($index)">
+                        x
+                    </button>
+                </div>
+    
+            }
+
         </div>
-        <button class="add-new-subtask">
+        <button type="button" class="add-new-subtask" (click)="addSubTask()">
             + Add New Subtask
         </button>
-    </div>
+    </section>
 
     <!-- select -->
-    <div class="status-container">
+    <section class="status-container">
         <label for="status">Status</label>
         <select name="" id="">
             <option value="todo">Todo</option>
         </select>
-    </div>
+    </section>
 
     <div class="btns">
-        <button class="create-new-Task">
+        <button type="submit" class="create-new-Task">
             Create Task
         </button>
     </div>

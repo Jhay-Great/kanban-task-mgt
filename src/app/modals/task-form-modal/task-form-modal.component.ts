@@ -65,10 +65,13 @@ export class TaskFormModalComponent implements OnInit, OnDestroy {
 
   createTask () {
     const form = this.taskForm;
-    if (form.invalid) return;
+    if (form.invalid) {
+      console.log('invalid form')
+      return;
+    };
 
-    const data = form.value;
-    console.log(data);
+    const {status, ...data} = form.value;
+    console.log(data, status);
     // dispatch action and payload
     // this.store.dispatch(createTask())
 
