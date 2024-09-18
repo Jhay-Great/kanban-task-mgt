@@ -1,13 +1,33 @@
-<div class="empty-container">
-    <p class="empty-board">
-        This board is empty. Create a new column to get started.
-    </p>
-    <button class="add-column">
-        + Add New Column
-    </button>
-    <!-- <router-outlet /> -->
-    <!-- <app-board-container /> -->
-</div>
+@if(isEmpty) {
+    <div class="empty-container">
+        <p class="empty-board">
+            This board is empty. Create a new column to get started.
+        </p>
+        <button class="add-column">
+            + Add New Column
+        </button>
+        <!-- <router-outlet /> -->
+        <!-- <app-board-container /> -->
+    </div>
+    
+}
+
+<section class="board">
+    <section class="board-column">
+        
+        <section class="top">
+            <div class="column-color"></div>
+            <p class="column-name"></p>
+        </section>
+
+        <section class="bottom">
+            <!-- incoming tasks -->
+        </section>
+        
+    </section>
+</section>
+
+
 
 
 

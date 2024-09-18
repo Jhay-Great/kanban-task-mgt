@@ -60,7 +60,7 @@ export class BoardFormModalComponent implements OnInit {
   }
 
   clearForm() {
-    this.columnFormArray.reset();
+    this.form.reset();
   }
 
   submit() {
