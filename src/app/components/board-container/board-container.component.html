@@ -19,28 +19,31 @@
             <section class="top">
                 <div class="column-color"></div>
                 <p class="column-name">
-                    {{ column.name }} ({{ (column.tasks).length}})
+                    {{ column.name }} ({{ (column.tasks)?.length && 0 }})
                 </p>
             </section>
     
             <section class="bottom">
                 <!-- incoming tasks -->
-                @for (task of column.tasks; track $index) {
-                    <div class="task-tab">
-                        <p class="title">
-                            {{ task.title }}
-                        </p>
-                        <p class="sub-tasks">
-                            of {{(column.tasks).length}} tasks
-                        </p>
-                    </div>
+                @if (column.tasks) {
+                    @for (task of column.tasks; track $index) {
+                        <div class="task-tab">
+                            <p class="title">
+                                {{ task.title }}
+                            </p>
+                            <p class="sub-tasks">
+                                of {{(column.tasks).length}} tasks
+                            </p>
+                        </div>
+                    }
+
                 }
             </section>
     
         </section>
     }
     <section class="board-column new-column">
-        <button>
+        <button [routerLink]="['/create-board']">
             + New Column
         </button>
     </section>

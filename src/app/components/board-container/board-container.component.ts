@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { RouterOutlet, Router, ActivatedRoute } from '@angular/router';
+import { RouterOutlet, Router, ActivatedRoute, RouterLink } from '@angular/router';
 import { AppState } from '../../model/AppState';
 import { Store } from '@ngrx/store';
 import { map, Observable, Subscription } from 'rxjs';
@@ -10,7 +10,7 @@ import { AsyncPipe } from '@angular/common';
 @Component({
   selector: 'app-board-container',
   standalone: true,
-  imports: [RouterOutlet, AsyncPipe],
+  imports: [RouterOutlet, AsyncPipe, RouterLink],
   templateUrl: './board-container.component.html',
   styleUrl: './board-container.component.scss'
 })

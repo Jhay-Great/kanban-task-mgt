@@ -47,7 +47,7 @@ export class BoardFormModalComponent implements OnInit {
 
   createNewColumns() {
     return this.fb.group({
-      columns: ['', Validators.required],
+      name: ['', Validators.required],
     });
   }
 
@@ -70,7 +70,7 @@ export class BoardFormModalComponent implements OnInit {
     }
 
     const board = { ...this.form.value, id: this.appService.generateId() };
-    console.log(board);
+    console.log('logging new board form: ', board);
     this.store.dispatch(createBoard({ board }));
     this.clearForm();
   }

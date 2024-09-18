@@ -11,7 +11,7 @@
     <div class="columns-container" formArrayName="columns">
       @for (column of columnFormArray.controls; track $index) {
       <div class="column" [formGroupName]="$index">
-        <input type="text" formControlName="columns" id="column-{{ $index }}" />
+        <input type="text" formControlName="name" id="column-{{ $index }}" />
         <button type="button" (click)="removeColumn($index)">x</button>
       </div>
       }
