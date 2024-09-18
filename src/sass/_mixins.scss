@@ -33,10 +33,11 @@
     letter-spacing: func.pixelsToRem(2);
 }
 
-@mixin bodyM {
+@mixin bodyM ($color) {
     @include font-default(medium);
     font-size: func.pixelsToRem(13);
     line-height: func.pixelsToRem(23);
+    color: $color;
 }
 
 @mixin bodyS {

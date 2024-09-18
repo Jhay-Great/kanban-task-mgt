@@ -47,11 +47,17 @@
 
     .task-tab {
         // height: func.pixelsToRem(90);
+        @include mix.headerM();
         width: 100%;
         border-radius: func.pixelsToRem(6);
         background-color: var.$color-white;
         padding: func.pixelsToRem(16);
         // box-shadow: 0px 4px 16px 0px func.addTransparency(#000, 10%);
         box-shadow: 0px 4px 5px 0px func.addTransparency(var.$color-dark-gray-v1, 10%);
+
+        .sub-tasks {
+            @include mix.bodyM(var.$color-medium-gray);
+            margin-top: func.pixelsToRem(8);
+        }
     }
 }

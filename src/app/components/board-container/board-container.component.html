@@ -27,8 +27,11 @@
                 <!-- incoming tasks -->
                 @for (task of column.tasks; track $index) {
                     <div class="task-tab">
-                        <p>
+                        <p class="title">
                             {{ task.title }}
+                        </p>
+                        <p class="sub-tasks">
+                            of {{(column.tasks).length}} tasks
                         </p>
                     </div>
                 }
