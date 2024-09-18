@@ -13,18 +13,23 @@
 }
 
 <section class="board">
-    <section class="board-column">
-        
-        <section class="top">
-            <div class="column-color"></div>
-            <p class="column-name"></p>
+    @for (column of (columns$ | async); track $index) {
+        <section class="board-column">
+            
+            <section class="top">
+                <div class="column-color"></div>
+                <p class="column-name">
+                    {{ column.name }} 
+                </p>
+            </section>
+    
+            <section class="bottom">
+                <!-- incoming tasks -->
+            </section>
+    
         </section>
 
-        <section class="bottom">
-            <!-- incoming tasks -->
-        </section>
-        
-    </section>
+    }
 </section>
 
 
