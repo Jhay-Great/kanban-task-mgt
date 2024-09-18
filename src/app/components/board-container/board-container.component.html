@@ -19,7 +19,7 @@
             <section class="top">
                 <div class="column-color"></div>
                 <p class="column-name">
-                    {{ column.name }} ({{ (column.tasks)?.length || 0}})
+                    {{ column.name }} ({{ column.tasks ? column.tasks.length : 0}})
                 </p>
             </section>
     
