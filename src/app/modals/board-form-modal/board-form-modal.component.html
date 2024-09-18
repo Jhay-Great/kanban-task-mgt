@@ -1,0 +1,27 @@
+<h2>Add New Board</h2>
+
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <div class="name">
+    <label for="name">Name</label>
+    <input type="text" formControlName="name" />
+  </div>
+
+  <div class="columns">
+    <label for="column-name"> Columns </label>
+    <div class="columns-container" formArrayName="columns">
+      @for (column of columnFormArray.controls; track $index) {
+      <div class="column" [formGroupName]="$index">
+        <input type="text" formControlName="columns" id="column-{{ $index }}" />
+        <button type="button" (click)="removeColumn($index)">x</button>
+      </div>
+      }
+    </div>
+  </div>
+
+  <div class="btns">
+    <button type="button" class="add-new-column" (click)="addColumns()">
+      + Add New Column
+    </button>
+    <button type="submit" class="create-new-board">Create New Board</button>
+  </div>
+</form>

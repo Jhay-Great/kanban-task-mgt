@@ -1,0 +1,10 @@
+@use '../../../sass/variables' as var;
+@use '../../../sass/mixins' as mix;
+@use '../../../sass/functions' as func;
+
+.create-new-board {
+    @include mix.add-button-primary(30, 0);
+}
+.add-new-column {
+    @include mix.add-button-secondary;
+}

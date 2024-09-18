@@ -1,34 +1,34 @@
-import { Component, OnInit } from '@angular/core';
-import { AppState } from '../../model/AppState';
-import { Store } from '@ngrx/store';
-import { selectBoard } from '../../state/board/board.selector';
-import { Observable } from 'rxjs';
-import { IBoard } from '../../model/board.interface';
 import { AsyncPipe } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule, FormGroup, Validators, FormArray } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { createBoard } from '../../state/board/board.action';
-import { FormBuilder, ReactiveFormsModule, FormGroup, Validators, FormArray } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../model/AppState';
+import { selectBoard } from '../../state/board/board.selector';
+import { ApplicationService } from '../../services/application/application.service';
+
+
 
 @Component({
-  selector: 'app-board-list',
+  selector: 'app-board-form-modal',
   standalone: true,
   imports: [AsyncPipe, RouterLink, ReactiveFormsModule],
-  templateUrl: './board-list.component.html',
-  styleUrl: './board-list.component.scss'
+  templateUrl: './board-form-modal.component.html',
+  styleUrl: './board-form-modal.component.scss'
 })
-export class BoardListComponent implements OnInit {
-
-  boards$!: Observable<IBoard[]>
+export class BoardFormModalComponent implements OnInit{
   form!: FormGroup
 
   constructor (
     private store: Store<AppState>,
     private fb: FormBuilder,
+    private appService: ApplicationService,
   ) {};
 
   ngOnInit(): void {
     // selects board array
-    this.boards$ = this.store.select(selectBoard);
+    // this.boards$ = this.store.select(selectBoard);
 
     // creates form
     this.form = this.fb.group({
@@ -65,25 +65,10 @@ export class BoardListComponent implements OnInit {
       return;
     }
 
-    const board = this.form.value;
+    const board = {...this.form.value, id: this.appService.generateId()};
+    console.log(board);
     this.store.dispatch(createBoard({board}));
     this.clearForm();
-  }
-
-  createNewBoard () {
-    // console.log('called...')
-    // this.store.dispatch(createBoard)
-    //     const data = {
-    //   name: 'boy',
-    //   id: '39sskls3',
-    //   columns: [
-    //     {
-    //       name: 'going out',
-    //       tasks: [],
-    //     }
-    //   ]
-    // }
-    // this.store.dispatch(createBoard({board: data}));
   }
 
 }

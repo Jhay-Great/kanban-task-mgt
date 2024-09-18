@@ -11,6 +11,10 @@ export const routes: Routes = [
     {
         path: 'board/:id',
         component: BoardContainerComponent,
+    },
+    {
+        path: 'create-board',
+        loadComponent: () => import('./modals/board-form-modal/board-form-modal.component').then((c) => c.BoardFormModalComponent)
     }
     
 ];
