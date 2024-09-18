@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
-import { AppComponent } from './app.component';
 import { BoardContainerComponent } from './components/board-container/board-container.component';
-// import { BoardContainerComponent } from './components/board-container/board-container.component';
+// import { AppComponent } from './app.component';
+
 
 export const routes: Routes = [
     // {
@@ -14,7 +14,11 @@ export const routes: Routes = [
     },
     {
         path: 'create-board',
-        loadComponent: () => import('./modals/board-form-modal/board-form-modal.component').then((c) => c.BoardFormModalComponent)
+        loadComponent: () => import('./modals/board-form-modal/board-form-modal.component').then((c) => c.BoardFormModalComponent),
+    },
+    {
+        path: 'create-task',
+        loadComponent: () => import('./modals/task-form-modal/task-form-modal.component').then((c) => c.TaskFormModalComponent),
     }
     
 ];
