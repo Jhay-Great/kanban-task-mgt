@@ -19,17 +19,28 @@
             <section class="top">
                 <div class="column-color"></div>
                 <p class="column-name">
-                    {{ column.name }} 
+                    {{ column.name }} ({{ (column.tasks).length}})
                 </p>
             </section>
     
             <section class="bottom">
                 <!-- incoming tasks -->
+                @for (task of column.tasks; track $index) {
+                    <div class="task-tab">
+                        <p>
+                            {{ task.title }}
+                        </p>
+                    </div>
+                }
             </section>
     
         </section>
-
     }
+    <section class="board-column new-column">
+        <button>
+            + New Column
+        </button>
+    </section>
 </section>
 
 

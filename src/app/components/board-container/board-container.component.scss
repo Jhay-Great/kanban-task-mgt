@@ -11,3 +11,47 @@
 .add-column {
     @include mix.add-button-primary;
 }
+.column-name {
+    @include mix.headerS;
+    margin-bottom: 1.5rem;
+    color: var.$color-medium-gray;
+}
+
+.board {
+    @include mix.flex();
+    width: 100%;
+    height: 100%;
+    overflow-x: scroll;
+    .board-column {
+        flex: 0 0 func.pixelsToRem(300);
+        // width: func.pixelsToRem(300);
+    }
+}
+.new-column {
+    background-color: #E9EFFA;
+    border-radius: func.pixelsToRem(6) func.pixelsToRem(6) 0 0;
+
+    button {
+        width: 100%;
+        height: 100%;
+        @include mix.flex;
+        justify-content: center;
+        align-items: center;
+        @include mix.headerXl(var.$color-medium-gray);
+        
+    }
+}
+
+.bottom {
+    @include mix.flex(column);
+
+    .task-tab {
+        // height: func.pixelsToRem(90);
+        width: 100%;
+        border-radius: func.pixelsToRem(6);
+        background-color: var.$color-white;
+        padding: func.pixelsToRem(16);
+        // box-shadow: 0px 4px 16px 0px func.addTransparency(#000, 10%);
+        box-shadow: 0px 4px 5px 0px func.addTransparency(var.$color-dark-gray-v1, 10%);
+    }
+}

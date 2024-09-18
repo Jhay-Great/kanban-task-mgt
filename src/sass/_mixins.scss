@@ -7,11 +7,11 @@
     font-family: var.$font-jakarta-sans;
 }
 
-@mixin headerXl {
+@mixin headerXl ($color: var.$color-black) {
     @include font-default(bold);
     font-size: func.pixelsToRem(24);
     line-height: func.pixelsToRem(30);
-    color: var.$color-black;
+    color: $color;
 }
 
 @mixin headerL {
