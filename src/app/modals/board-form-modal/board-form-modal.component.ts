@@ -1,6 +1,12 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, FormGroup, Validators, FormArray } from '@angular/forms';
+import {
+  FormBuilder,
+  ReactiveFormsModule,
+  FormGroup,
+  Validators,
+  FormArray,
+} from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { createBoard } from '../../state/board/board.action';
 import { Store } from '@ngrx/store';
@@ -8,23 +14,21 @@ import { AppState } from '../../model/AppState';
 import { selectBoard } from '../../state/board/board.selector';
 import { ApplicationService } from '../../services/application/application.service';
 
-
-
 @Component({
   selector: 'app-board-form-modal',
   standalone: true,
   imports: [AsyncPipe, RouterLink, ReactiveFormsModule],
   templateUrl: './board-form-modal.component.html',
-  styleUrl: './board-form-modal.component.scss'
+  styleUrl: './board-form-modal.component.scss',
 })
-export class BoardFormModalComponent implements OnInit{
-  form!: FormGroup
+export class BoardFormModalComponent implements OnInit {
+  form!: FormGroup;
 
-  constructor (
+  constructor(
     private store: Store<AppState>,
     private fb: FormBuilder,
-    private appService: ApplicationService,
-  ) {};
+    private appService: ApplicationService
+  ) {}
 
   ngOnInit(): void {
     // selects board array
@@ -34,28 +38,28 @@ export class BoardFormModalComponent implements OnInit{
     this.form = this.fb.group({
       name: ['', Validators.required],
       columns: this.fb.array([]),
-    })
+    });
   }
 
-  get columnFormArray (): FormArray {
+  get columnFormArray(): FormArray {
     return this.form.get('columns') as FormArray;
   }
 
-  createNewColumns () {
+  createNewColumns() {
     return this.fb.group({
       columns: ['', Validators.required],
-    })
+    });
   }
-  
-  addColumns () {
+
+  addColumns() {
     this.columnFormArray.push(this.createNewColumns());
   }
 
-  removeColumn (index:number) {
+  removeColumn(index: number) {
     this.columnFormArray.removeAt(index);
   }
 
-  clearForm () {
+  clearForm() {
     this.columnFormArray.reset();
   }
 
@@ -65,10 +69,9 @@ export class BoardFormModalComponent implements OnInit{
       return;
     }
 
-    const board = {...this.form.value, id: this.appService.generateId()};
+    const board = { ...this.form.value, id: this.appService.generateId() };
     console.log(board);
-    this.store.dispatch(createBoard({board}));
+    this.store.dispatch(createBoard({ board }));
     this.clearForm();
   }
-
 }
