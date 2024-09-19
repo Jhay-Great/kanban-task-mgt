@@ -11,14 +11,25 @@ export const routes: Routes = [
     {
         path: 'board/:id',
         component: BoardContainerComponent,
+        children: [
+            {
+                path: 'create-board',
+                loadChildren: () => import('./modals/board-form-modal/board-form-modal.component').then((c) => c.BoardFormModalComponent),
+            },
+            {
+                path: 'create-task',
+                loadChildren: () => import('./modals/task-form-modal/task-form-modal.component').then((c) => c.TaskFormModalComponent),
+            }
+        ]
+        
     },
-    {
-        path: 'create-board',
-        loadComponent: () => import('./modals/board-form-modal/board-form-modal.component').then((c) => c.BoardFormModalComponent),
-    },
-    {
-        path: 'create-task',
-        loadComponent: () => import('./modals/task-form-modal/task-form-modal.component').then((c) => c.TaskFormModalComponent),
-    }
+    // {
+    //     path: 'create-board',
+    //     loadComponent: () => import('./modals/board-form-modal/board-form-modal.component').then((c) => c.BoardFormModalComponent),
+    // },
+    // {
+    //     path: 'create-task',
+    //     loadComponent: () => import('./modals/task-form-modal/task-form-modal.component').then((c) => c.TaskFormModalComponent),
+    // }
     
 ];

@@ -15,6 +15,7 @@ body {
     height: 100dvh;
     background-color: var.$color-light-gray;
     font-family: var.$font-jakarta-sans;
+    position: relative;
 }
 app-root {
     // @include mix.flex(column);
@@ -73,6 +74,10 @@ app-root {
         color: var.$color-medium-gray;
     
     }
+}
+
+app-task-form-modal {
+    @include mix.modal;
 }
 
 

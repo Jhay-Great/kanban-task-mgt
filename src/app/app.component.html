@@ -2,6 +2,13 @@
 
 <app-sidebar />
 
+@if (taskModalIsActive | async) {
+    <app-task-form-modal  />
+}
+@if (boardModalIsActive | async) {
+    <app-board-form-modal />
+}
+
 <div class="board-space">
     <!-- <p class="empty-board">
         This board is empty. Create a new column to get started.

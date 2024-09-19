@@ -8,18 +8,34 @@ import { createBoard, onLoadBoardData } from './state/board/board.action';
 import { NavComponent } from './components/nav/nav.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { BoardContainerComponent } from './components/board-container/board-container.component';
+import { TaskFormModalComponent } from './modals/task-form-modal/task-form-modal.component';
+import { BoardFormModalComponent } from './modals/board-form-modal/board-form-modal.component';
+import { ApplicationService } from './services/application/application.service';
+import { Observable, tap } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavComponent, SidebarComponent, BoardContainerComponent],
+  imports: [
+    RouterOutlet,
+    AsyncPipe,
+    NavComponent,
+    SidebarComponent,
+    BoardContainerComponent,
+    TaskFormModalComponent,
+    BoardFormModalComponent,
+    
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
   title = 'kanban';
+  boardModalIsActive!:Observable<boolean>;
+  taskModalIsActive!:Observable<boolean>;
 
-  constructor(private store: Store<AppState>) {}
+  constructor(private store: Store<AppState>, private appService: ApplicationService) {}
 
   ngOnInit(): void {
     this.store.dispatch(onLoadBoardData()),
@@ -27,5 +43,12 @@ export class AppComponent implements OnInit {
         .select(selectBoard)
         .subscribe((value) => console.log('boards: ', value));
     
+    this.boardModalIsActive = this.appService.boardFormModalActive$
+    this.taskModalIsActive = this.appService.taskFormModalActive$
+  }
+
+  removeModal () {
+    console.log('called...')
+    this.appService.toggleTaskModal();
   }
 }

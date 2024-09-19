@@ -1,29 +1,38 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { ApplicationService } from '../../services/application/application.service';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../model/AppState';
 
 @Component({
   selector: 'app-nav',
   standalone: true,
   imports: [RouterLink],
   templateUrl: './nav.component.html',
-  styleUrl: './nav.component.scss'
+  styleUrl: './nav.component.scss',
 })
 export class NavComponent {
+  boardName: string = 'Platform Launch';
+  isActive: boolean = false;
 
-  boardName:string = 'Platform Launch';
-  isActive:boolean = false;
+  constructor(
+    private appService: ApplicationService, 
+    private store: Store<AppState>,
+  ) {}
 
+  addTask(): void {
+    this.appService.toggleTaskModal();
+  }
 
-  toggleSettingsMenu () {
+  toggleSettingsMenu() {
     this.isActive = !this.isActive;
   }
 
-  editBoard () {
+  editBoard() {
     this.isActive = false;
   }
 
-  deleteBoard () {
+  deleteBoard() {
     this.isActive = false;
   }
-
 }

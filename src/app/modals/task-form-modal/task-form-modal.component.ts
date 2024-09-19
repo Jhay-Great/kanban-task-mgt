@@ -2,6 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../model/AppState';
+import { ActivatedRoute } from '@angular/router';
+import { selectColumns } from '../../state/board/board.selector';
+import { map, Observable, tap } from 'rxjs';
 
 @Component({
   selector: 'app-task-form-modal',
@@ -13,10 +16,12 @@ import { AppState } from '../../model/AppState';
 export class TaskFormModalComponent implements OnInit, OnDestroy {
 
   taskForm!: FormGroup;
+  boardIsActive:boolean = false;
 
   constructor (
     private fb: FormBuilder,
     private store: Store<AppState>,
+    private activatedRoute: ActivatedRoute,
   ) {};
 
   ngOnInit(): void {
@@ -25,7 +30,22 @@ export class TaskFormModalComponent implements OnInit, OnDestroy {
       description: [''],
       subtask: this.fb.array([]),
       status: this.fb.array([]),
-    })
+    });
+
+    // getting the columns from the board
+    this.activatedRoute.params.subscribe(
+      params => {
+        const id = params['id'];
+        console.log('logging id on init of form: ', id);
+        this.store.select(selectColumns(id)).pipe(
+          tap(data => console.log(data)),
+          // map(data => {
+
+          // })
+        ).subscribe()
+      }
+    )
+
   }
 
   ngOnDestroy(): void {
