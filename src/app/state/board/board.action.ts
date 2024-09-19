@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
-import { IBoard, ITask } from '../../model/board.interface';
+import { IBoard, IColumns, ITask } from '../../model/board.interface';
+import { Update } from '@ngrx/entity';
 
 // load initial board data Actions
 export const onLoadBoardData = createAction('[Board Api] Load initial data');
@@ -32,4 +33,9 @@ export const selectedBoard = createAction(
 export const createTask = createAction(
     '[Board Api] Creates a task',
     props<{task: ITask}>(),
+)
+
+export const updateBoard = createAction(
+    '[Board Api] Updates board',
+    props<{update: Update<IColumns[]>}>(),
 )

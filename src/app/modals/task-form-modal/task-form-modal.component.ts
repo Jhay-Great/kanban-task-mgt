@@ -6,8 +6,10 @@ import { ActivatedRoute } from '@angular/router';
 import { selectColumns } from '../../state/board/board.selector';
 import { map, Observable, tap } from 'rxjs';
 import { ApplicationService } from '../../services/application/application.service';
-import { IColumns } from '../../model/board.interface';
+import { IColumns, ITask } from '../../model/board.interface';
 import { AsyncPipe } from '@angular/common';
+import { updateBoard } from '../../state/board/board.action';
+import { Update } from '@ngrx/entity';
 
 @Component({
   selector: 'app-task-form-modal',
@@ -65,14 +67,7 @@ export class TaskFormModalComponent implements OnInit, OnDestroy {
     })
     this.subTaskArray.push(element)
   }
-
-  // selectStatus ():void {
-  //   const element = this.fb.group({
-  //     status: [''],
-  //   });
-  //   this.statusArray.push(element)
-  // }
-
+  
   clear ():void {
     this.taskForm.reset();
   }
@@ -88,10 +83,39 @@ export class TaskFormModalComponent implements OnInit, OnDestroy {
       return;
     };
 
-    const {status, ...data} = form.value;
-    console.log(data, status);
-    // dispatch action and payload
-    // this.store.dispatch(createTask())
+    const data = form.value;
+    // console.log('incoming data: ', data);
+    this.appService.selectedBoard$.subscribe(
+      board => {
+        const boards = board?.columns.map(column => {
+          // console.log(board);
+          if (column.name === data.status) {
+            const updatedColumn:IColumns = { ...column, tasks: [...column.tasks, data] };
+            // console.log(updatedColumn); // This will log the modified column
+            return updatedColumn; // Return the modified column
+          }
+          return column; // Return the original column if no match
+        });
+        
+        
+
+        if (!board || !boards) return;
+
+        const update: Update<IColumns[]> = {
+          id: board.id,
+          changes: boards, 
+        }
+
+        if (!update) return;
+
+        // console.log('data to be dispatched: ', update);
+
+        // console.log(up)
+        
+        // dispatch action and payload
+        this.store.dispatch(updateBoard({update}))
+      }
+    )
 
 
   }
