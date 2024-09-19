@@ -22,9 +22,12 @@
 
         <!-- current status -->
         <select name="" id="">
-            <option value="">
-                
-            </option>
+            @for(status of (columns$ | async); track $index) {
+                <option [value]="status.name">
+                    {{ status.name }}
+                </option>
+
+            }
         </select>
     </section>
 

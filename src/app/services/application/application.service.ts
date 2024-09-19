@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject, filter, map, Observable, Subject } from 'rxjs';
 import {v4 as uuid} from 'uuid';
-import { IBoard, ITask } from '../../model/board.interface';
+import { IBoard, IColumns, ITask } from '../../model/board.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +35,16 @@ export class ApplicationService {
 
 
   constructor() { }
+
+  // returns an observable of a preferred type and not a union type including undefined
+  getColumns ():Observable<IColumns[]> {
+    return this.selectedBoard$.pipe(
+      filter(data => data != null),
+      map(data => {
+        return data!.columns;
+      }),
+    )
+  }
 
   activeBoard (board:IBoard) {
     this.selectedBoardSubject.next(board);

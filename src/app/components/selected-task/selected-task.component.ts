@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApplicationService } from '../../services/application/application.service';
 import { Observable } from 'rxjs';
-import { ITask } from '../../model/board.interface';
+import { IColumns, ITask } from '../../model/board.interface';
 import { AsyncPipe } from '@angular/common';
 
 @Component({
@@ -14,6 +14,7 @@ import { AsyncPipe } from '@angular/common';
 export class SelectedTaskComponent implements OnInit {
   title:string = 'hello'
   task!:Observable<ITask | null>;
+  columns$!:Observable<IColumns[]>;
 
   constructor (
     private appService: ApplicationService,
@@ -23,6 +24,8 @@ export class SelectedTaskComponent implements OnInit {
     const data = this.appService.taskDetail$;
     if (!data) return;
     this.task = data;
+
+    this.columns$ = this.appService.getColumns();
 
 
   }
