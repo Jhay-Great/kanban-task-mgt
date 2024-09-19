@@ -173,7 +173,7 @@
     justify-content: center;
     align-items: center;
     // gap: 2rem;
-    background: func.addTransparency(var.$color-black, 30%);
+    background: func.addTransparency(var.$color-black, 30%); 
 
     & > * {
         background-color: var.$color-white;

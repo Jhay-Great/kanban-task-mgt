@@ -8,5 +8,6 @@ import { Component } from '@angular/core';
   styleUrl: './selected-task.component.scss'
 })
 export class SelectedTaskComponent {
+  title:string = 'hello'
 
 }

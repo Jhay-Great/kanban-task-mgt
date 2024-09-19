@@ -13,6 +13,7 @@ import { BoardFormModalComponent } from './modals/board-form-modal/board-form-mo
 import { ApplicationService } from './services/application/application.service';
 import { Observable, tap } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
+import { SelectedTaskComponent } from './components/selected-task/selected-task.component';
 
 @Component({
   selector: 'app-root',
@@ -25,7 +26,7 @@ import { AsyncPipe } from '@angular/common';
     BoardContainerComponent,
     TaskFormModalComponent,
     BoardFormModalComponent,
-    
+    SelectedTaskComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
@@ -34,6 +35,8 @@ export class AppComponent implements OnInit {
   title = 'kanban';
   boardModalIsActive!:Observable<boolean>;
   taskModalIsActive!:Observable<boolean>;
+  taskDetailsIsActive!:Observable<boolean>;
+  
 
   constructor(private store: Store<AppState>, private appService: ApplicationService) {}
 
@@ -45,6 +48,7 @@ export class AppComponent implements OnInit {
     
     this.boardModalIsActive = this.appService.boardFormModalActive$
     this.taskModalIsActive = this.appService.taskFormModalActive$
+    this.taskDetailsIsActive = this.appService.selectedTaskActive$
   }
 
   removeModal () {

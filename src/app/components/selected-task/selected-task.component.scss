@@ -1,0 +1,8 @@
+@use "../../../sass/variables" as var;
+@use "../../../sass/mixins" as mix;
+@use "../../../sass/functions" as func;
+
+.background {
+//   @include mix.modal;
+  position: relative;
+}

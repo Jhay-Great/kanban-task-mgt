@@ -27,7 +27,7 @@
                 <!-- incoming tasks -->
                 @if (column.tasks) {
                     @for (task of column.tasks; track $index) {
-                        <div class="task-tab">
+                        <div class="task-tab" (click)="displayTaskDetails()">
                             <p class="title">
                                 {{ task.title }}
                             </p>

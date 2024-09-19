@@ -55,6 +55,9 @@ export class BoardContainerComponent implements OnInit, OnDestroy {
   }
 
   // displays task form
+  displayTaskDetails ():void {
+    this.appService.toggleSelectedTask();
+  }
 }
 
 

@@ -79,6 +79,10 @@ app-root {
 app-task-form-modal {
     @include mix.modal;
 }
+app-selected-task {
+    @extend app-task-form-modal;
+    // position: relative;
+}
 
 
 button {

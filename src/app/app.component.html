@@ -8,6 +8,9 @@
 @if (boardModalIsActive | async) {
     <app-board-form-modal />
 }
+@if (taskDetailsIsActive | async) {
+    <app-selected-task />
+}
 
 <div class="board-space">
     <!-- <p class="empty-board">
