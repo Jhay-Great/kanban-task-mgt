@@ -75,12 +75,14 @@ app-root {
     
     }
 }
-
-app-task-form-modal {
+app-board-form-modal {
     @include mix.modal;
 }
+app-task-form-modal {
+    @extend app-board-form-modal;
+}
 app-selected-task {
-    @extend app-task-form-modal;
+    @extend app-board-form-modal;
 }
 
 

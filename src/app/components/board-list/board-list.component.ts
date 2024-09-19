@@ -8,6 +8,7 @@ import { AsyncPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { createBoard } from '../../state/board/board.action';
 import { FormBuilder, ReactiveFormsModule, FormGroup, Validators, FormArray } from '@angular/forms';
+import { ApplicationService } from '../../services/application/application.service';
 
 @Component({
   selector: 'app-board-list',
@@ -24,6 +25,7 @@ export class BoardListComponent implements OnInit {
   constructor (
     private store: Store<AppState>,
     private fb: FormBuilder,
+    private appService: ApplicationService,
   ) {};
 
   ngOnInit(): void {
@@ -71,6 +73,7 @@ export class BoardListComponent implements OnInit {
   }
 
   createNewBoard () {
+    this.appService.toggleBoardModal();
     // console.log('called...')
     // this.store.dispatch(createBoard)
     //     const data = {

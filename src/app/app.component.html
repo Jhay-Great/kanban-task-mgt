@@ -2,11 +2,11 @@
 
 <app-sidebar />
 
-@if (taskModalIsActive | async) {
-    <app-task-form-modal  />
-}
 @if (boardModalIsActive | async) {
     <app-board-form-modal />
+}
+@if (taskModalIsActive | async) {
+    <app-task-form-modal  />
 }
 @if (taskDetailsIsActive | async) {
     <app-selected-task />
