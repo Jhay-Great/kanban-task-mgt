@@ -75,72 +75,7 @@ export class TaskFormModalComponent implements OnInit, OnDestroy {
   removeSubTask (index:number) {
     this.subTaskArray.removeAt(index)
   }
-
-  // createTask () {
-  //   const form = this.taskForm;
-  //   if (form.invalid) {
-  //     console.log('invalid form')
-  //     return;
-  //   };
-
-  //   const data = form.value;
-  //   // console.log('incoming data: ', data);
-  //   this.appService.selectedBoard$.subscribe(
-  //     board => {
-  //       const boards = board?.columns.map(column => {
-  //         // console.log(board);
-  //         if (column.name === data.status) {
-  //           const updatedColumn:IColumns = { ...column, tasks: [...column.tasks, data] };
-  //           // console.log(updatedColumn); // This will log the modified column
-  //           return updatedColumn; // Return the modified column
-  //         }
-  //         return column; // Return the original column if no match
-  //       });
-        
-        
-
-  //       if (!board || !boards) return;
-
-  //       // const updatedBoard: IBoard = {
-  //       //   ...board,
-  //       //   columns: boards, // Assuming boards is of type IColumns[]
-  //       // };
-        
-  //       // const columnUpdate: Update<IBoard> = {
-  //       //   id: board.id, // Ensure you're providing the correct id
-  //       //   changes: updatedBoard, // Here you should pass the updated board
-  //       // };
-        
-
-        
-        
-  //       // const update: Update<IColumns[]> = {
-  //       //   id: board.id,
-  //       //   changes: boards, 
-  //       // }
-
-  //       const update: Update<IBoard> = {
-  //         // id: board.id,
-  //         ...board,
-  //         changes: {
-  //           columns: boards
-  //         }, 
-  //       }
-  //       // console.log('data of type of IBoard: ', columnUpdate);
-        
-  //       if (!update) return;
-        
-  //       // console.log('data to be dispatched: ', update);
-
-  //       // console.log(up)
-        
-  //       // dispatch action and payload
-  //       // this.store.dispatch(updateBoard({update}))
-  //     }
-  //   )
-
-
-  // }
+  
 
   createTask() {
     const form = this.taskForm;
