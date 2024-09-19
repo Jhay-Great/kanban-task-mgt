@@ -3,7 +3,7 @@ import { RouterOutlet, Router, ActivatedRoute, RouterLink } from '@angular/route
 import { AppState } from '../../model/AppState';
 import { Store } from '@ngrx/store';
 import { map, Observable, Subscription, tap } from 'rxjs';
-import { IBoard, IColumns } from '../../model/board.interface';
+import { IBoard, IColumns, ITask } from '../../model/board.interface';
 import { selectColumns } from '../../state/board/board.selector';
 import { AsyncPipe } from '@angular/common';
 import { ApplicationService } from '../../services/application/application.service';
@@ -55,8 +55,9 @@ export class BoardContainerComponent implements OnInit, OnDestroy {
   }
 
   // displays task form
-  displayTaskDetails ():void {
+  displayTaskDetails (task:ITask):void {
     this.appService.toggleSelectedTask();
+    this.appService.displayTaskDetail(task);
   }
 }
 

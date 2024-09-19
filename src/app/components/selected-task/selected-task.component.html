@@ -1,21 +1,24 @@
 <div class="background">
     <section>
         <h2>
-            {{ title }}
+            {{ (task | async)?.title }}
         </h2>
 
         <p>
             Subtask <span>
-                0 of 3
-                <!-- {{ }} -->
+                <!-- 0 of 3 -->
+                {{0}} of {{ ((task | async)?.subtasks)?.length }}
             </span>
         </p>
 
         <!-- loop through to get the data -->
-        <div>
-            <input type="checkbox" name="" id="is-complete">
-            <label for="is-complete">isCompleted</label>
-        </div>
+        @for (subtask of (task | async)?.subtasks; track $index) {
+            <div>
+                <input type="checkbox" name="" id="is-complete">
+                <label for="is-complete">{{ subtask.title }}</label>
+            </div>
+
+        }
 
         <!-- current status -->
         <select name="" id="">

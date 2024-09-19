@@ -29,7 +29,7 @@ export class ApplicationService {
   private selectedBoardSubject = new BehaviorSubject<IBoard | null>(null)
   selectedBoard$ = this.selectedBoardSubject.asObservable()
 
-  taskDetail!:ITask;
+  private taskDetail!:ITask;
   private taskDetailSubject = new BehaviorSubject<ITask | null>(null);
   taskDetail$ = this.taskDetailSubject.asObservable();
 
@@ -55,5 +55,9 @@ export class ApplicationService {
   toggleSelectedTask () {
     this.isTaskSelected = !this.isTaskSelected;
     this.selectedTaskSubject$.next(this.isTaskSelected)
+  }
+  
+  displayTaskDetail (data:ITask) {
+    this.taskDetailSubject.next(data)
   }
 }
