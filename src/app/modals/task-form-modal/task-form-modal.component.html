@@ -37,12 +37,22 @@
         </section>
     
         <!-- select -->
-        <section class="status-container">
+        <section class="status-container" >
             <label for="status">Status</label>
-            <select name="" id="">
-                <option value="todo">Todo</option>
+            <select name="" id="" formControlName="status">
+                @for (status of boardStatus$ | async; track $index) {
+                    <option [value]="status.name">{{status.name}}</option>
+                }
             </select>
         </section>
+        <!-- <section class="status-container" formArrayName="status">
+            <label for="status">Status</label>
+            <select name="" id="" formControlName="status">
+                @for (status of boardStatus$ | async; track $index) {
+                    <option value="status.name">{{status.name}}</option>
+                }
+            </select>
+        </section> -->
     
         <div class="btns">
             <button type="submit" class="create-new-Task">

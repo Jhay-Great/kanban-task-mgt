@@ -5,11 +5,14 @@ import { AppState } from '../../model/AppState';
 import { ActivatedRoute } from '@angular/router';
 import { selectColumns } from '../../state/board/board.selector';
 import { map, Observable, tap } from 'rxjs';
+import { ApplicationService } from '../../services/application/application.service';
+import { IColumns } from '../../model/board.interface';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-task-form-modal',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, AsyncPipe],
   templateUrl: './task-form-modal.component.html',
   styleUrl: './task-form-modal.component.scss'
 })
@@ -17,11 +20,13 @@ export class TaskFormModalComponent implements OnInit, OnDestroy {
 
   taskForm!: FormGroup;
   boardIsActive:boolean = false;
+  boardStatus$!: Observable<IColumns[] | undefined>;
 
   constructor (
     private fb: FormBuilder,
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute,
+    private appService: ApplicationService,
   ) {};
 
   ngOnInit(): void {
@@ -29,22 +34,15 @@ export class TaskFormModalComponent implements OnInit, OnDestroy {
       title: ['', Validators.required],
       description: [''],
       subtask: this.fb.array([]),
-      status: this.fb.array([]),
+      status: [''],
+      // status: this.fb.array([]),
     });
 
     // getting the columns from the board
-    this.activatedRoute.params.subscribe(
-      params => {
-        const id = params['id'];
-        console.log('logging id on init of form: ', id);
-        this.store.select(selectColumns(id)).pipe(
-          tap(data => console.log(data)),
-          // map(data => {
-
-          // })
-        ).subscribe()
-      }
+    this.boardStatus$ = this.appService.selectedBoard$.pipe(
+      map(data => data?.columns)
     )
+    
 
   }
 
@@ -56,9 +54,9 @@ export class TaskFormModalComponent implements OnInit, OnDestroy {
     return this.taskForm.get('subtask') as  FormArray;
   }
 
-  get statusArray () {
-    return this.taskForm.get('status') as FormArray;
-  }
+  // get statusArray () {
+  //   return this.taskForm.get('status') as FormArray;
+  // }
 
   addSubTask (): void {
     const element = this.fb.group({
@@ -68,12 +66,12 @@ export class TaskFormModalComponent implements OnInit, OnDestroy {
     this.subTaskArray.push(element)
   }
 
-  selectStatus ():void {
-    const element = this.fb.group({
-      status: [''],
-    });
-    this.statusArray.push(element)
-  }
+  // selectStatus ():void {
+  //   const element = this.fb.group({
+  //     status: [''],
+  //   });
+  //   this.statusArray.push(element)
+  // }
 
   clear ():void {
     this.taskForm.reset();
