@@ -4,9 +4,9 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../../model/AppState';
 import { ActivatedRoute } from '@angular/router';
 import { selectColumns } from '../../state/board/board.selector';
-import { map, Observable, tap } from 'rxjs';
+import { map, Observable, take, tap } from 'rxjs';
 import { ApplicationService } from '../../services/application/application.service';
-import { IColumns, ITask } from '../../model/board.interface';
+import { IBoard, IColumns, ITask } from '../../model/board.interface';
 import { AsyncPipe } from '@angular/common';
 import { updateBoard } from '../../state/board/board.action';
 import { Update } from '@ngrx/entity';
@@ -76,49 +76,105 @@ export class TaskFormModalComponent implements OnInit, OnDestroy {
     this.subTaskArray.removeAt(index)
   }
 
-  createTask () {
+  // createTask () {
+  //   const form = this.taskForm;
+  //   if (form.invalid) {
+  //     console.log('invalid form')
+  //     return;
+  //   };
+
+  //   const data = form.value;
+  //   // console.log('incoming data: ', data);
+  //   this.appService.selectedBoard$.subscribe(
+  //     board => {
+  //       const boards = board?.columns.map(column => {
+  //         // console.log(board);
+  //         if (column.name === data.status) {
+  //           const updatedColumn:IColumns = { ...column, tasks: [...column.tasks, data] };
+  //           // console.log(updatedColumn); // This will log the modified column
+  //           return updatedColumn; // Return the modified column
+  //         }
+  //         return column; // Return the original column if no match
+  //       });
+        
+        
+
+  //       if (!board || !boards) return;
+
+  //       // const updatedBoard: IBoard = {
+  //       //   ...board,
+  //       //   columns: boards, // Assuming boards is of type IColumns[]
+  //       // };
+        
+  //       // const columnUpdate: Update<IBoard> = {
+  //       //   id: board.id, // Ensure you're providing the correct id
+  //       //   changes: updatedBoard, // Here you should pass the updated board
+  //       // };
+        
+
+        
+        
+  //       // const update: Update<IColumns[]> = {
+  //       //   id: board.id,
+  //       //   changes: boards, 
+  //       // }
+
+  //       const update: Update<IBoard> = {
+  //         // id: board.id,
+  //         ...board,
+  //         changes: {
+  //           columns: boards
+  //         }, 
+  //       }
+  //       // console.log('data of type of IBoard: ', columnUpdate);
+        
+  //       if (!update) return;
+        
+  //       // console.log('data to be dispatched: ', update);
+
+  //       // console.log(up)
+        
+  //       // dispatch action and payload
+  //       // this.store.dispatch(updateBoard({update}))
+  //     }
+  //   )
+
+
+  // }
+
+  createTask() {
     const form = this.taskForm;
     if (form.invalid) {
-      console.log('invalid form')
+      console.log('invalid form');
       return;
-    };
-
+    }
+  
     const data = form.value;
-    // console.log('incoming data: ', data);
-    this.appService.selectedBoard$.subscribe(
-      board => {
-        const boards = board?.columns.map(column => {
-          // console.log(board);
-          if (column.name === data.status) {
-            const updatedColumn:IColumns = { ...column, tasks: [...column.tasks, data] };
-            // console.log(updatedColumn); // This will log the modified column
-            return updatedColumn; // Return the modified column
-          }
-          return column; // Return the original column if no match
-        });
-        
-        
-
-        if (!board || !boards) return;
-
-        const update: Update<IColumns[]> = {
-          id: board.id,
-          changes: boards, 
+    
+    this.appService.selectedBoard$.pipe(take(1)).subscribe(board => {
+      if (!board) return; // returning if board undefined
+  
+      const boards = board.columns.map(column => {
+        if (column.name === data.status) {
+          return { ...column, tasks: [...column.tasks, data] }; // Update the column with the new task
         }
-
-        if (!update) return;
-
-        // console.log('data to be dispatched: ', update);
-
-        // console.log(up)
-        
-        // dispatch action and payload
-        this.store.dispatch(updateBoard({update}))
-      }
-    )
-
-
+        return column; 
+      });
+      
+      const updatedBoard: IBoard = {
+        ...board,
+        columns: boards,
+      };
+  
+      const update: Update<IBoard> = {
+        id: board.id, 
+        changes: updatedBoard, 
+      };
+      
+      this.store.dispatch(updateBoard({ update }));
+    });
   }
+  
 
 
 }

@@ -37,5 +37,5 @@ export const createTask = createAction(
 
 export const updateBoard = createAction(
     '[Board Api] Updates board',
-    props<{update: Update<IColumns[]>}>(),
+    props<{update: Update<IBoard>}>(),
 )

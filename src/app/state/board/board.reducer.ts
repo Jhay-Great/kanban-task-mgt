@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { IBoard } from '../../model/board.interface';
-import { createBoard, deleteBoard, onLoadBoardData, onLoadBoardSuccess } from './board.action';
+import { createBoard, deleteBoard, onLoadBoardData, onLoadBoardSuccess, updateBoard } from './board.action';
 
 // entities
 /**
@@ -33,4 +33,5 @@ export const boardReducer = createReducer(
   ),
   on(createBoard, (state, {board}) => (console.log('called...'), boardAdapter.addOne(board, state))),
   on(deleteBoard, (state, { id }) => boardAdapter.removeOne(id, state)),
+  on(updateBoard, (state, { update }) => boardAdapter.updateOne(update, state)),
 );
