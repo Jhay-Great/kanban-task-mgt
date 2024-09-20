@@ -56,7 +56,7 @@ export class ApplicationService {
 
   toggleBoardModal () {
     this.boardIsActive = !this.boardIsActive;
-    this.boardFormSubject$.next(!this.boardFormModalActive)
+    this.boardFormSubject$.next(!this.boardIsActive)
   }
   toggleTaskModal () {
     this.taskIsActive = !this.taskIsActive;

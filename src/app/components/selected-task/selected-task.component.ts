@@ -30,4 +30,9 @@ export class SelectedTaskComponent implements OnInit {
 
   }
 
+  removeModal () {
+    console.log('called...')
+    this.appService.toggleSelectedTask();
+  }
+
 }

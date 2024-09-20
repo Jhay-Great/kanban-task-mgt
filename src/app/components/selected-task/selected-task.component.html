@@ -1,40 +1,40 @@
-<div class="background">
-    <section class="modal-content">
-        <h2>
-            {{ (task | async)?.title }}
-        </h2>
-
-        @if ((task | async )?.description ) {
-            <p class="description">
-                {{ (task | async )?.description }}
-            </p>
-        }
-
-        <p class="subtask-title">
-            Subtask <span>
-                <!-- 0 of 3 -->
-                {{0}} of {{ ((task | async)?.subtasks)?.length }}
-            </span>
-        </p>
-
-        <!-- loop through to get the data -->
-        @for (subtask of (task | async)?.subtasks; track $index) {
-            <div class="subtask">
-                <input type="checkbox" name="" id="is-complete">
-                <label for="is-complete">{{ subtask.title }}</label>
-            </div>
-
-        }
-
-        <!-- current status -->
-        <select name="" id="">
-            @for(status of (columns$ | async); track $index) {
-                <option [value]="status.name">
-                    {{ status.name }}
-                </option>
-
-            }
-        </select>
-    </section>
-
+<div class="background" (click)="removeModal()">
+    
 </div>
+<section class="modal-content">
+    <h2>
+        {{ (task | async)?.title }}
+    </h2>
+
+    @if ((task | async )?.description ) {
+        <p class="description">
+            {{ (task | async )?.description }}
+        </p>
+    }
+
+    <p class="subtask-title">
+        Subtask <span>
+            <!-- 0 of 3 -->
+            {{0}} of {{ ((task | async)?.subtasks)?.length }}
+        </span>
+    </p>
+
+    <!-- loop through to get the data -->
+    @for (subtask of (task | async)?.subtasks; track $index) {
+        <div class="subtask">
+            <input type="checkbox" name="" id="is-complete">
+            <label for="is-complete">{{ subtask.title }}</label>
+        </div>
+
+    }
+
+    <!-- current status -->
+    <select name="" id="">
+        @for(status of (columns$ | async); track $index) {
+            <option [value]="status.name">
+                {{ status.name }}
+            </option>
+
+        }
+    </select>
+</section>

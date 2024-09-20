@@ -109,6 +109,11 @@ export class TaskFormModalComponent implements OnInit, OnDestroy {
       this.store.dispatch(updateBoard({ update }));
     });
   }
+
+  removeModal () {
+    console.log('called...')
+    this.appService.toggleTaskModal();
+  }
   
 
 

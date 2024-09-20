@@ -177,13 +177,14 @@
     // gap: 2rem;
     background: func.addTransparency(var.$color-black, 30%); 
 
-    & > * {
+    & > :first-child {
         // background-color: var.$color-white;
         // height: fit-content;
         // @include flex(column);
         // gap: ;
 
-        position: relative;
+        position: absolute;
+        z-index: 0;
         width: 100%;
         height: 100%;
         @include flex();
@@ -191,17 +192,30 @@
         align-items: center;
         background-color: var.$transparent;
 
-        & > * {
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-            width: func.pixelsToRem(480);
-            max-height: func.pixelsToRem(600);
+        // & > * {
+        //     background: white;
+        //     padding: 2rem;
+        //     border-radius: 8px;
+        //     display: flex;
+        //     flex-direction: column;
+        //     gap: 2rem;
+        //     width: func.pixelsToRem(480);
+        //     max-height: func.pixelsToRem(600);
           
-        }
+        // }
+    }
+    & > :last-child {
+        background: white;
+        padding: 2rem;
+        border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        width: func.pixelsToRem(480);
+        max-height: func.pixelsToRem(600);
+        align-items: initial;
+        z-index: 1;
+      
     }
 }
 

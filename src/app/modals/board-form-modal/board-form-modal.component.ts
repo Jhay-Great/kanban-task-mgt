@@ -74,4 +74,9 @@ export class BoardFormModalComponent implements OnInit {
     this.store.dispatch(createBoard({ board }));
     this.clearForm();
   }
+
+  removeModal () {
+    console.log('called...')
+    this.appService.toggleBoardModal();
+  }
 }
