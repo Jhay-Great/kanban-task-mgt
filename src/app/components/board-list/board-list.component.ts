@@ -74,19 +74,7 @@ export class BoardListComponent implements OnInit {
 
   createNewBoard () {
     this.appService.toggleBoardModal();
-    // console.log('called...')
-    // this.store.dispatch(createBoard)
-    //     const data = {
-    //   name: 'boy',
-    //   id: '39sskls3',
-    //   columns: [
-    //     {
-    //       name: 'going out',
-    //       tasks: [],
-    //     }
-    //   ]
-    // }
-    // this.store.dispatch(createBoard({board: data}));
+    
   }
 
 }

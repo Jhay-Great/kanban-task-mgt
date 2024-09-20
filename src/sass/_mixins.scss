@@ -18,6 +18,7 @@
     @include font-default(bold);
     font-size: func.pixelsToRem(18);
     line-height: func.pixelsToRem(23);
+    color: var.$color-black;
 }
 
 @mixin headerM {
@@ -33,17 +34,18 @@
     letter-spacing: func.pixelsToRem(2);
 }
 
-@mixin bodyM ($color) {
+@mixin bodyL ($color:var.$color-black) {
     @include font-default(medium);
     font-size: func.pixelsToRem(13);
     line-height: func.pixelsToRem(23);
     color: $color;
 }
 
-@mixin bodyS {
+@mixin bodyM ($color:var.$color-black) {
     @include font-default(bold);
     font-size: func.pixelsToRem(12);
     line-height: func.pixelsToRem(15);
+    color: $color;
 }
 
 // buttons
@@ -196,6 +198,8 @@
             display: flex;
             flex-direction: column;
             gap: 2rem;
+            width: func.pixelsToRem(480);
+            max-height: func.pixelsToRem(600);
           
         }
     }

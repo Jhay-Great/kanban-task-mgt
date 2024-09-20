@@ -4,7 +4,13 @@
             {{ (task | async)?.title }}
         </h2>
 
-        <p>
+        @if ((task | async )?.description ) {
+            <p class="description">
+                {{ (task | async )?.description }}
+            </p>
+        }
+
+        <p class="subtask-title">
             Subtask <span>
                 <!-- 0 of 3 -->
                 {{0}} of {{ ((task | async)?.subtasks)?.length }}
@@ -13,7 +19,7 @@
 
         <!-- loop through to get the data -->
         @for (subtask of (task | async)?.subtasks; track $index) {
-            <div>
+            <div class="subtask">
                 <input type="checkbox" name="" id="is-complete">
                 <label for="is-complete">{{ subtask.title }}</label>
             </div>
