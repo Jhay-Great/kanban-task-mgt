@@ -15,7 +15,7 @@
     <p class="subtask-title">
         Subtask <span>
             <!-- 0 of 3 -->
-            {{0}} of {{ ((task | async)?.subtasks)?.length }}
+            {{ statusCount | async }} of {{ ((task | async)?.subtasks)?.length }}
         </span>
     </p>
 
