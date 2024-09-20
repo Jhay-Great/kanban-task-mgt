@@ -14,7 +14,7 @@ export class ApplicationService {
 
   // subjects
   private boardIsActive:boolean = false;
-  private boardFormSubject$ = new BehaviorSubject<boolean>(false);
+  private boardFormSubject$ = new BehaviorSubject<boolean>(this.boardIsActive);
   boardFormModalActive$ = this.boardFormSubject$.asObservable();
 
   private taskIsActive:boolean = false;
@@ -55,8 +55,9 @@ export class ApplicationService {
   }
 
   toggleBoardModal () {
+    console.log('toggle board modal call triggered in service')
     this.boardIsActive = !this.boardIsActive;
-    this.boardFormSubject$.next(!this.boardIsActive)
+    this.boardFormSubject$.next(this.boardIsActive)
   }
   toggleTaskModal () {
     this.taskIsActive = !this.taskIsActive;

@@ -73,6 +73,7 @@ export class BoardListComponent implements OnInit {
   }
 
   createNewBoard () {
+    console.log('board list was clicked...');
     this.appService.toggleBoardModal();
     
   }

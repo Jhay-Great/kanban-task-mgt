@@ -49,6 +49,10 @@ export class AppComponent implements OnInit {
     this.boardModalIsActive = this.appService.boardFormModalActive$
     this.taskModalIsActive = this.appService.taskFormModalActive$
     this.taskDetailsIsActive = this.appService.selectedTaskActive$
+
+    this.boardModalIsActive.subscribe(val => {
+      console.log(val);
+    })
   }
 
   removeModal () {
