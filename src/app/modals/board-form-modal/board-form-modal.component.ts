@@ -104,7 +104,8 @@ export class BoardFormModalComponent implements OnInit, OnDestroy {
   }
 
   submit() {
-    if (!this.form.valid) {
+    const formData = this.form;
+    if (!formData.valid) {
       console.log('form is invalid');
       return;
     }
@@ -113,6 +114,16 @@ export class BoardFormModalComponent implements OnInit, OnDestroy {
     console.log('logging new board form: ', board);
     this.store.dispatch(createBoard({ board }));
     this.clearForm();
+  }
+
+  saveChanges () {
+    const formData = this.form;
+    if (!formData.valid) {
+      console.log('form is invalid');
+      return;
+    }
+
+    console.log('updated form value: ', formData.value)
   }
 
   removeModal () {

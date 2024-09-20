@@ -7,7 +7,7 @@
     {{ isEditable ? 'Edit Board' : 'Add New Board'}}
   </h2>
   
-  <form [formGroup]="form" (ngSubmit)="submit()">
+  <form [formGroup]="form" (ngSubmit)="isEditable ? saveChanges() : submit()">
     <div class="name">
       <label for="name">Name</label>
       <input type="text" formControlName="name" />
@@ -29,7 +29,9 @@
       <button type="button" class="add-new-column" (click)="addColumns()">
         + Add New Column
       </button>
-      <button type="submit" class="create-new-board">Create New Board</button>
+      <button type="submit" class="create-new-board">
+        {{ isEditable ? "Save Changes" : "Create New Board" }}
+      </button>
     </div>
   </form>
 
