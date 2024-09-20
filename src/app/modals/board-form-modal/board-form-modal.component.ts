@@ -8,12 +8,14 @@ import {
   FormArray,
 } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { createBoard } from '../../state/board/board.action';
+import { createBoard, updateBoard } from '../../state/board/board.action';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../model/AppState';
 import { selectBoard } from '../../state/board/board.selector';
 import { ApplicationService } from '../../services/application/application.service';
 import { filter, map, Observable, Subscription } from 'rxjs';
+import { IBoard } from '../../model/board.interface';
+import { Update } from '@ngrx/entity';
 
 @Component({
   selector: 'app-board-form-modal',
@@ -25,6 +27,7 @@ import { filter, map, Observable, Subscription } from 'rxjs';
 export class BoardFormModalComponent implements OnInit, OnDestroy {
   form!: FormGroup;
   boardName!:string;
+  boardId!:string;
   columnNames!:string[];
   isEditable:boolean = false;
   subscription!:Subscription;
@@ -46,6 +49,7 @@ export class BoardFormModalComponent implements OnInit, OnDestroy {
         map(
           data => {
             if (data === null) return;
+            this.boardId = data.id;
             this.boardName = data.name;
             this.columnNames = data.columns.map(column => column.name)
   
@@ -104,26 +108,33 @@ export class BoardFormModalComponent implements OnInit, OnDestroy {
   }
 
   submit() {
-    const formData = this.form;
-    if (!formData.valid) {
+    const form = this.form;
+    if (!form.valid) {
       console.log('form is invalid');
       return;
     }
 
-    const board = { ...this.form.value, id: this.appService.generateId() };
+    const board = { ...form.value, id: this.appService.generateId() };
     console.log('logging new board form: ', board);
     this.store.dispatch(createBoard({ board }));
     this.clearForm();
   }
 
   saveChanges () {
-    const formData = this.form;
-    if (!formData.valid) {
+    const form = this.form;
+    if (!form.valid) {
       console.log('form is invalid');
       return;
     }
 
-    console.log('updated form value: ', formData.value)
+    const update:Update<IBoard> = {id: this.boardId, changes: {
+      ...form.value
+    }};
+
+    this.store.dispatch(updateBoard({ update }));
+
+
+    console.log('updated form value: ', update)
   }
 
   removeModal () {
