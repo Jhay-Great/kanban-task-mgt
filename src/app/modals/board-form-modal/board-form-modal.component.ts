@@ -31,9 +31,6 @@ export class BoardFormModalComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // selects board array
-    // this.boards$ = this.store.select(selectBoard);
-
     // creates form
     this.form = this.fb.group({
       name: ['', Validators.required],
