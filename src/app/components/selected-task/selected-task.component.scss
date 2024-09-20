@@ -2,6 +2,7 @@
 @use "../../../sass/mixins" as mix;
 @use "../../../sass/functions" as func;
 @use "../../../sass/select-dropdown" as select;
+@use "../../../sass/custom-checkbox" as checkbox;
 
 
 h2 {
@@ -38,6 +39,8 @@ select {
   @include select.select;
   @include select.select-inner;
 }
+
+@include checkbox.custom-checkbox ;
 
 
 

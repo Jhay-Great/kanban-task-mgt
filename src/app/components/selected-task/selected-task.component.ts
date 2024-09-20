@@ -41,6 +41,7 @@ export class SelectedTaskComponent implements OnInit {
     //   ),
     //   tap(data => console.log(data))
     // )
+    
     // this.statusCount = this.task.pipe(
     //   filter(data => data !== null),
     //   map(task => 
@@ -50,7 +51,8 @@ export class SelectedTaskComponent implements OnInit {
     //   ),
     //   tap(data => console.log(data)) // Log the total count
     // )
-    
+
+    // understand what this is actually doing
     this.statusCount = this.task.pipe(
       filter(data => data !== null),  // Ensure that the task is not null
       map(task => {
