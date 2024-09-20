@@ -31,6 +31,7 @@ export class NavComponent {
 
   editBoard() {
     this.isActive = false;
+    this.appService.populateBoardForm();
   }
 
   deleteBoard() {

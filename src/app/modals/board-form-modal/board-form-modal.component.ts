@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   FormBuilder,
   ReactiveFormsModule,
@@ -13,6 +13,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../../model/AppState';
 import { selectBoard } from '../../state/board/board.selector';
 import { ApplicationService } from '../../services/application/application.service';
+import { filter, map, Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-board-form-modal',
@@ -21,8 +22,12 @@ import { ApplicationService } from '../../services/application/application.servi
   templateUrl: './board-form-modal.component.html',
   styleUrl: './board-form-modal.component.scss',
 })
-export class BoardFormModalComponent implements OnInit {
+export class BoardFormModalComponent implements OnInit, OnDestroy {
   form!: FormGroup;
+  boardName!:string;
+  columnNames!:string[];
+  isEditable:boolean = false;
+  subscription!:Subscription;
 
   constructor(
     private store: Store<AppState>,
@@ -32,10 +37,48 @@ export class BoardFormModalComponent implements OnInit {
 
   ngOnInit(): void {
     // creates form
-    this.form = this.fb.group({
-      name: ['', Validators.required],
-      columns: this.fb.array([]),
-    });
+    this.isEditable = this.appService.isEditable;
+    if (this.appService.isEditable) {
+      this.appService.boardFormData$.pipe(
+        filter(
+          data => data !== null
+        ),
+        map(
+          data => {
+            if (data === null) return;
+            this.boardName = data.name;
+            this.columnNames = data.columns.map(column => column.name)
+  
+            this.form = this.fb.group({
+              name: [this.boardName],
+              columns: this.fb.array([]),
+            });
+            this.columnNames.forEach(name => {
+              const status = this.fb.group({
+                name: [name, Validators.required]
+              });
+              (this.form.get('columns') as FormArray).push(status)
+              
+            })
+          }
+        )
+      ).subscribe();
+
+    }else {
+      this.form = this.fb.group({
+        name: ['', Validators.required],
+        columns: this.fb.array([]),
+      });
+
+    }
+
+
+
+    
+  }
+
+  ngOnDestroy(): void {
+    
   }
 
   get columnFormArray(): FormArray {

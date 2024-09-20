@@ -12,6 +12,8 @@ export class ApplicationService {
   private taskModalActive: boolean = false;
   private deleteModalActive: boolean = false;
 
+  isEditable:boolean = false;
+
   // subjects
   private boardIsActive:boolean = false;
   private boardFormSubject$ = new BehaviorSubject<boolean>(this.boardIsActive);
@@ -26,8 +28,12 @@ export class ApplicationService {
   selectedTaskActive$ = this.selectedTaskSubject$.asObservable();
 
   // boardSubject
-  private selectedBoardSubject = new BehaviorSubject<IBoard | null>(null)
+  selectedBoard:IBoard | null = null;
+  private selectedBoardSubject = new BehaviorSubject<IBoard | null>(this.selectedBoard)
   selectedBoard$ = this.selectedBoardSubject.asObservable()
+
+  private boardFormSubject = new BehaviorSubject<IBoard | null>(null);
+  boardFormData$ = this.boardFormSubject.asObservable();
 
   private taskDetail!:ITask;
   private taskDetailSubject = new BehaviorSubject<ITask | null>(null);
@@ -47,7 +53,8 @@ export class ApplicationService {
   }
 
   activeBoard (board:IBoard) {
-    this.selectedBoardSubject.next(board);
+    this.selectedBoard = board;
+    this.selectedBoardSubject.next(this.selectedBoard);
   }
 
   generateId () {
@@ -70,5 +77,13 @@ export class ApplicationService {
   
   displayTaskDetail (data:ITask) {
     this.taskDetailSubject.next(data)
+  }
+
+  populateBoardForm () {
+    // console.log(this.selectedBoard);
+    this.isEditable = true;
+    this.toggleBoardModal();
+    this.boardFormSubject.next(this.selectedBoard);
+    
   }
 }
