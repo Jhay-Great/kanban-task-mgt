@@ -62,7 +62,7 @@ export class ApplicationService {
   }
 
   toggleBoardModal () {
-    console.log('toggle board modal call triggered in service')
+    this.isEditable = false;
     this.boardIsActive = !this.boardIsActive;
     this.boardFormSubject$.next(this.boardIsActive)
   }
@@ -81,8 +81,8 @@ export class ApplicationService {
 
   populateBoardForm () {
     // console.log(this.selectedBoard);
-    this.isEditable = true;
     this.toggleBoardModal();
+    this.isEditable = true;
     this.boardFormSubject.next(this.selectedBoard);
     
   }
