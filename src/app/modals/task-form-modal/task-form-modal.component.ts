@@ -92,10 +92,9 @@ export class TaskFormModalComponent implements OnInit, OnDestroy {
       const boards = board.columns.map(column => {
         console.log('select board data: ', column);
         if (column.name === data.status) {
-          // return { ...column, tasks: [...column?.tasks, data] }; // Update the column with the new task
           return {
             ...column,
-            tasks: column.tasks ? [...column.tasks, data] : [data]  // If `tasks` exists, add to it; otherwise, initialize with `data`
+            tasks: column.tasks ? [...column.tasks, data] : [data]  // Update the column with the new task also creates the tasks property if it doesn't exists
           };
           
         }
