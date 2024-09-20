@@ -3,6 +3,7 @@ import { RouterLink } from '@angular/router';
 import { ApplicationService } from '../../services/application/application.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../model/AppState';
+import { deleteBoard } from '../../state/board/board.action';
 
 @Component({
   selector: 'app-nav',
@@ -34,5 +35,15 @@ export class NavComponent {
 
   deleteBoard() {
     this.isActive = false;
+    const subscription = this.appService.selectedBoard$.subscribe(
+      board => {
+        if (board === null) return;
+        const { id } = board;
+        console.log('deleting: ', id);
+        this.store.dispatch(deleteBoard({id}));
+      }
+    );
+
+    subscription.unsubscribe();
   }
 }
