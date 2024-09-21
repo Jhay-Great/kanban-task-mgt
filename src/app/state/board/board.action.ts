@@ -29,13 +29,18 @@ export const selectedBoard = createAction(
     props<{id: string}>(),
 )
 
+export const updateBoard = createAction(
+    '[Board Api] Updates board',
+    props<{update: Update<IBoard>}>(),
+)
+
 // creates a task action
 export const createTask = createAction(
     '[Board Api] Creates a task',
     props<{task: ITask}>(),
 )
 
-export const updateBoard = createAction(
-    '[Board Api] Updates board',
-    props<{update: Update<IBoard>}>(),
+export const deleteTask = createAction(
+    '[Board Api] Deletes a task',
+    props<{task: ITask}>(),
 )

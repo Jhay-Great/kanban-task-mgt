@@ -28,7 +28,7 @@ export class ApplicationService {
   selectedTaskActive$ = this.selectedTaskSubject$.asObservable();
 
   // boardSubject
-  selectedBoard:IBoard | null = null;
+  private selectedBoard:IBoard | null = null; //remove private when there's no option
   private selectedBoardSubject = new BehaviorSubject<IBoard | null>(this.selectedBoard)
   selectedBoard$ = this.selectedBoardSubject.asObservable()
 
