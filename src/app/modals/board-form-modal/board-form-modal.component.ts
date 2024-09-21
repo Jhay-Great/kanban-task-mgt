@@ -137,18 +137,24 @@ export class BoardFormModalComponent implements OnInit, OnDestroy {
     }
     
     // updates the nested object
+    const updateBoardName = form.value.name || this.boardData.name;
     const updatedData = {columns: this.boardData.columns.map(
       (column, index) => {
-        const updatedName = form.value.columns[index].name;
+        const updatedColumnName = form.value.columns[index].name;
         return {
-          name: updatedName || column.name,
+          name: updatedColumnName || column.name,
           tasks: column.tasks,
         }
       }
     )}
+
+    const boardUpdate = {
+      name: updateBoardName,
+      ...updatedData,
+    }
     
 
-    console.log('updates: ', updatedData);
+    console.log('updates: ', boardUpdate);
     
     
     // console.log('testing mutation logic: ', {
@@ -159,8 +165,9 @@ export class BoardFormModalComponent implements OnInit, OnDestroy {
     // })
 
     const update:Update<IBoard> = {id: this.boardId, changes: {
-      ...this.boardData,
-      ...updatedData,
+      ...boardUpdate
+      // ...this.boardData,
+      // ...updatedData,
       // ...form.value
     }};
 
