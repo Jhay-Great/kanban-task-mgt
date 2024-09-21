@@ -2,9 +2,36 @@
     
 </div>
 <section class="modal-content">
-    <h2>
-        {{ (task | async)?.title }}
-    </h2>
+    <header>
+        <h2>
+            {{ (task | async)?.title }}
+        </h2>
+
+        
+        <section class="btns">
+            <!-- additional settings -->
+            <button (click)="toggleSettingsMenu()">
+                <img src="../../../assets/svgs/icon-vertical-ellipsis.svg" alt="vertical ellipsis svg icon">
+            </button>
+
+            <!-- settings -->
+            @if(isActive) {
+                <section class="settings">
+                    <button class="edit-board"  >
+                        Edit Task
+                    </button>
+                    <button class="delete-board" >
+                        Delete Task
+                    </button>
+                </section>
+
+            }
+        </section>
+        
+        <!-- <div class="task-settings">
+            <!-- <app-settings-dropdown-menu /> --
+        </div> -->
+    </header>
 
     @if ((task | async )?.description ) {
         <p class="description">

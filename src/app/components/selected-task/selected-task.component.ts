@@ -3,11 +3,12 @@ import { ApplicationService } from '../../services/application/application.servi
 import { filter, map, Observable, tap } from 'rxjs';
 import { IColumns, ITask } from '../../model/board.interface';
 import { AsyncPipe } from '@angular/common';
+import { SettingsDropdownMenuComponent } from "../settings-dropdown-menu/settings-dropdown-menu.component";
 
 @Component({
   selector: 'app-selected-task',
   standalone: true,
-  imports: [AsyncPipe],
+  imports: [AsyncPipe, SettingsDropdownMenuComponent],
   templateUrl: './selected-task.component.html',
   styleUrl: './selected-task.component.scss'
 })
@@ -16,6 +17,7 @@ export class SelectedTaskComponent implements OnInit {
   task!:Observable<ITask | null>;
   columns$!:Observable<IColumns[]>;
   statusCount!:Observable<number>;
+  isActive:boolean = false;
 
   constructor (
     private appService: ApplicationService,
@@ -69,6 +71,10 @@ export class SelectedTaskComponent implements OnInit {
     
 
 
+  }
+  
+  toggleSettingsMenu() {
+    this.isActive = !this.isActive;
   }
 
   removeModal () {

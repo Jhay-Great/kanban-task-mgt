@@ -5,8 +5,53 @@
 @use "../../../sass/custom-checkbox" as checkbox;
 
 
-h2 {
-  @include mix.headerL;
+header {
+  position: relative;
+  @include mix.flex();
+  justify-content: space-between;
+  h2 {
+    @include mix.headerL;
+  }
+
+  .task-settings {
+    // position: absolute;
+  }
+
+  .btns {
+    position: relative;
+
+
+    .settings {
+      position: absolute;
+      top: func.pixelsToRem(30);
+      right: func.pixelsToRem(5);
+      @include mix.flex(column);
+      width: func.pixelsToRem(180);
+      padding: 1.5rem 1rem;
+      background-color: var.$color-white;
+      box-shadow: 0 0 10px 5px func.addTransparency(var.$color-dark-gray-v1, 20%);
+      border-radius: func.pixelsToRem(8);
+    
+      button {
+          @include mix.button-fonts(13, bold);
+          padding: .2rem 0;
+          &.edit-board {
+              color: var.$color-medium-gray;
+          }
+    
+          &.delete-board {
+              color: var.$color-red;
+          }
+    
+      }
+    
+    }
+    
+  }
+
+  
+
+
 }
 .description {
   @include mix.bodyL(var.$color-medium-gray);
