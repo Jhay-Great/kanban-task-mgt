@@ -22,6 +22,7 @@ export class TaskFormModalComponent implements OnInit, OnDestroy {
 
   taskForm!: FormGroup;
   boardIsActive:boolean = false;
+  isTaskEditable:boolean = false;
   boardStatus$!: Observable<IColumns[] | undefined>;
 
   constructor (
@@ -118,6 +119,10 @@ export class TaskFormModalComponent implements OnInit, OnDestroy {
   removeModal () {
     console.log('called...')
     this.appService.toggleTaskModal();
+  }
+
+  cancelModal () {
+    this.appService.hideTaskEditableForm();
   }
   
 

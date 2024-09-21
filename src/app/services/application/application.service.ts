@@ -13,6 +13,7 @@ export class ApplicationService {
   private deleteModalActive: boolean = false;
 
   isEditable:boolean = false;
+  private isTaskEditable: boolean = false;
 
   // subjects
   private boardIsActive:boolean = false;
@@ -34,6 +35,9 @@ export class ApplicationService {
 
   private boardFormSubject = new BehaviorSubject<IBoard | null>(null);
   boardFormData$ = this.boardFormSubject.asObservable();
+
+  private taskFormSubject = new BehaviorSubject<ITask | null>(null);
+  taskFormData$ = this.taskFormSubject.asObservable();
 
   private taskDetail!:ITask;
   private taskDetailSubject = new BehaviorSubject<ITask | null>(null);
@@ -61,29 +65,51 @@ export class ApplicationService {
     return uuid();
   }
 
+  // toggles board form modal
   toggleBoardModal () {
     this.isEditable = false;
     this.boardIsActive = !this.boardIsActive;
     this.boardFormSubject$.next(this.boardIsActive)
   }
+  // toggles task form
   toggleTaskModal () {
     this.taskIsActive = !this.taskIsActive;
     this.taskFormSubject$.next(this.taskIsActive)
   }
+  // toggles task detail modal
   toggleSelectedTask () {
     this.isTaskSelected = !this.isTaskSelected;
     this.selectedTaskSubject$.next(this.isTaskSelected)
   }
-  
+
   displayTaskDetail (data:ITask) {
+    this.taskDetail = data;
     this.taskDetailSubject.next(data)
   }
 
+  // populates board form
   populateBoardForm () {
     // console.log(this.selectedBoard);
     this.toggleBoardModal();
     this.isEditable = true;
     this.boardFormSubject.next(this.selectedBoard);
     
+  }
+
+  onEdit () {
+    this.isTaskEditable = !this.isTaskEditable;
+  }
+
+  hideTaskEditableForm () {
+    this.toggleTaskModal();
+    this.toggleSelectedTask();
+  }
+
+  populateTaskForm () {
+    this.hideTaskEditableForm();
+    // this.toggleTaskModal(); // to display task form
+    // this.toggleSelectedTask();
+    // this.onEdit(); // for populating form
+    this.taskFormSubject.next(this.taskDetail);
   }
 }

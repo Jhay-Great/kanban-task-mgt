@@ -16,8 +16,8 @@
 
             <!-- settings -->
             @if(isActive) {
-                <section class="settings">
-                    <button class="edit-board"  >
+                <section class="settings" >
+                    <button class="edit-board" (click)="edit()">
                         Edit Task
                     </button>
                     <button class="delete-board" (click)="delete()">

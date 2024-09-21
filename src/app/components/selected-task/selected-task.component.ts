@@ -82,6 +82,11 @@ export class SelectedTaskComponent implements OnInit {
     this.isActive = !this.isActive;
   }
 
+  // edit task
+  edit () {
+    this.appService.populateTaskForm();
+  }
+
   // delete task
   delete () {
     

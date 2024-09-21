@@ -80,6 +80,7 @@ app-board-form-modal {
 }
 app-task-form-modal {
     @extend app-board-form-modal;
+    // z-index: 10;
 }
 app-selected-task {
     @extend app-board-form-modal;
