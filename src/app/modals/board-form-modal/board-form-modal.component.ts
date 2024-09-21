@@ -138,6 +138,7 @@ export class BoardFormModalComponent implements OnInit, OnDestroy {
 
     console.log('form data: ', form.value);
 
+    // updates board name and columns, also adds new column
     const loopingFrom = {
       name: form.value.name,
       columns: form.value.columns.map(
@@ -146,7 +147,6 @@ export class BoardFormModalComponent implements OnInit, OnDestroy {
           return {
             name: updates,
             tasks: this.boardData.columns[index]?.tasks ,
-            // tasks: [this.boardData.columns[index] || column.tasks],
           }
         }
       )
@@ -154,37 +154,34 @@ export class BoardFormModalComponent implements OnInit, OnDestroy {
 
     console.log('looping based of the form value: ', loopingFrom);
     
-    // updates the nested object
-    const updateBoardName = form.value.name || this.boardData.name;
-    const updatedData = {columns: this.boardData.columns.map(
-      (column, index) => {
-        const updatedColumnName = form.value.columns[index].name;
-        return {
-          name: updatedColumnName || column.name,
-          tasks: column.tasks,
-        }
-      }
-    )}
+    // initial logic: updates the nested object
+    // const updateBoardName = form.value.name || this.boardData.name;
+    // const updatedData = {columns: this.boardData.columns.map(
+    //   (column, index) => {
+    //     const updatedColumnName = form.value.columns[index].name;
+    //     return {
+    //       name: updatedColumnName || column.name,
+    //       tasks: column.tasks,
+    //     }
+    //   }
+    // )}
 
     // const boardUpdate = {
     //   name: updateBoardName,
     //   ...updatedData,
     // }
+    // updated board object
     const boardUpdate = {
       ...loopingFrom,
     }
     
-
-    console.log('updates: ', boardUpdate);
     
-
+    // partial to update the board
     const update:Update<IBoard> = {id: this.boardId, changes: {
       ...boardUpdate
       
     }};
     
-
-    console.log('dispatched data: ', update);
 
     this.store.dispatch(updateBoard({ update }));
 
