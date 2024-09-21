@@ -84,30 +84,7 @@ export class SelectedTaskComponent implements OnInit {
 
   // delete task
   delete () {
-    // this.isActive = !this.isActive; // works properly
-
-    // const board = this.appService.selectedBoard;
-    // console.log(this.appService.selectedBoard);
     
-    // this.task.pipe(
-    //   take(1),
-    //   tap(data => {
-    //     console.log(data);
-    //   }),
-    //   map(data => {
-
-    //   })
-    // ).subscribe();
-
-    // this.task.pipe(
-
-    //   // switchMap(() =>
-    //   // {
-    //   //   this.task
-    //   // }
-        
-    //   // )
-    // )
     const selectedBoard$ = this.appService.selectedBoard$;
     const selectTask$ = this.task;
 
