@@ -14,7 +14,7 @@ import { AppState } from '../../model/AppState';
 import { selectBoard } from '../../state/board/board.selector';
 import { ApplicationService } from '../../services/application/application.service';
 import { filter, map, Observable, Subscription, tap } from 'rxjs';
-import { IBoard, ITask } from '../../model/board.interface';
+import { IBoard, IColumns, ITask } from '../../model/board.interface';
 import { Update } from '@ngrx/entity';
 
 @Component({
@@ -135,6 +135,24 @@ export class BoardFormModalComponent implements OnInit, OnDestroy {
       console.log('form is invalid');
       return;
     }
+
+    console.log('form data: ', form.value);
+
+    const loopingFrom = {
+      name: form.value.name,
+      columns: form.value.columns.map(
+        (column:IColumns, index:number) => {
+          const updates = column.name || this.boardData.columns[index].name;
+          return {
+            name: updates,
+            tasks: this.boardData.columns[index]?.tasks ,
+            // tasks: [this.boardData.columns[index] || column.tasks],
+          }
+        }
+      )
+    }
+
+    console.log('looping based of the form value: ', loopingFrom);
     
     // updates the nested object
     const updateBoardName = form.value.name || this.boardData.name;
@@ -148,34 +166,23 @@ export class BoardFormModalComponent implements OnInit, OnDestroy {
       }
     )}
 
+    // const boardUpdate = {
+    //   name: updateBoardName,
+    //   ...updatedData,
+    // }
     const boardUpdate = {
-      name: updateBoardName,
-      ...updatedData,
+      ...loopingFrom,
     }
     
 
     console.log('updates: ', boardUpdate);
     
-    
-    // console.log('testing mutation logic: ', {
-    //   ...this.boardData,
-    //   // ...form.value,
-    //   // id: this.boardData.id,
-    //   // columns: [...this.boardData.columns, [form.value]]
-    // })
 
     const update:Update<IBoard> = {id: this.boardId, changes: {
       ...boardUpdate
-      // ...this.boardData,
-      // ...updatedData,
-      // ...form.value
+      
     }};
-
-    // const update:Update<IBoard> = {id: this.boardId, changes: {
-    //   // ...this.boardData,
-    //   // ...updatedData,
-    //   ...form.value
-    // }};
+    
 
     console.log('dispatched data: ', update);
 
