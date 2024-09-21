@@ -13,8 +13,8 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../../model/AppState';
 import { selectBoard } from '../../state/board/board.selector';
 import { ApplicationService } from '../../services/application/application.service';
-import { filter, map, Observable, Subscription } from 'rxjs';
-import { IBoard } from '../../model/board.interface';
+import { filter, map, Observable, Subscription, tap } from 'rxjs';
+import { IBoard, ITask } from '../../model/board.interface';
 import { Update } from '@ngrx/entity';
 
 @Component({
@@ -29,6 +29,8 @@ export class BoardFormModalComponent implements OnInit, OnDestroy {
   boardName!:string;
   boardId!:string;
   columnNames!:string[];
+  tasks!:ITask[];
+  boardData!:IBoard;
   isEditable:boolean = false;
   subscription!:Subscription;
 
@@ -46,12 +48,19 @@ export class BoardFormModalComponent implements OnInit, OnDestroy {
         filter(
           data => data !== null
         ),
+        tap(data => {
+          if (data === null) return;
+          this.boardData = data;
+          const d = data.columns.map(column => (column.tasks))
+          console.log('logs d: ', d);
+
+        }),
         map(
           data => {
             if (data === null) return;
             this.boardId = data.id;
             this.boardName = data.name;
-            this.columnNames = data.columns.map(column => column.name)
+            this.columnNames = data.columns.map(column => (column.name))
   
             this.form = this.fb.group({
               name: [this.boardName],
@@ -126,19 +135,50 @@ export class BoardFormModalComponent implements OnInit, OnDestroy {
       console.log('form is invalid');
       return;
     }
+    
+    // updates the nested object
+    const updatedData = {columns: this.boardData.columns.map(
+      (column, index) => {
+        const updatedName = form.value.columns[index].name;
+        return {
+          name: updatedName || column.name,
+          tasks: column.tasks,
+        }
+      }
+    )}
+    
+
+    console.log('updates: ', updatedData);
+    
+    
+    // console.log('testing mutation logic: ', {
+    //   ...this.boardData,
+    //   // ...form.value,
+    //   // id: this.boardData.id,
+    //   // columns: [...this.boardData.columns, [form.value]]
+    // })
 
     const update:Update<IBoard> = {id: this.boardId, changes: {
-      ...form.value
+      ...this.boardData,
+      ...updatedData,
+      // ...form.value
     }};
+
+    // const update:Update<IBoard> = {id: this.boardId, changes: {
+    //   // ...this.boardData,
+    //   // ...updatedData,
+    //   ...form.value
+    // }};
+
+    console.log('dispatched data: ', update);
 
     this.store.dispatch(updateBoard({ update }));
 
 
-    console.log('updated form value: ', update)
+    // console.log('updated form value: ', update)
   }
 
   removeModal () {
-    console.log('called...')
     this.appService.toggleBoardModal();
   }
 }
