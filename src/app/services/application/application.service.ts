@@ -90,18 +90,13 @@ export class ApplicationService {
 
   // populates board form
   populateBoardForm () {
-    // console.log(this.selectedBoard);
     this.toggleBoardModal();
     this.isEditable = true;
     this.boardFormSubject.next(this.selectedBoard);
     
   }
 
-  onEdit () {
-    console.log('logging editability status before reassigning: ', this.isTaskEditable);
-    this.isTaskEditable = !this.isTaskEditable;
-    console.log('logging editability status after reassigning: ', this.isTaskEditable);
-    // return this.isTaskEditable = !this.isTaskEditable;
+  getEditState () {
     return this.isTaskEditable;
   }
 
@@ -112,9 +107,7 @@ export class ApplicationService {
   
   populateTaskForm () {
     this.hideTaskEditableForm();
-    console.log('about to call onEdit func..')
-    this.onEdit(); // for populating form
-    // this.isTaskEditable = true;
+    this.isTaskEditable = true;
     this.taskFormSubject.next(this.taskDetail);
   }
 }

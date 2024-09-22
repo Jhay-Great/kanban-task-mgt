@@ -22,7 +22,7 @@ export class TaskFormModalComponent implements OnInit, OnDestroy {
 
   taskForm!: FormGroup;
   boardIsActive:boolean = false;
-  isTaskEditable!:boolean;
+  isTaskEditable:boolean = false;
   boardStatus$!: Observable<IColumns[] | undefined>;
 
   constructor (
@@ -37,7 +37,7 @@ export class TaskFormModalComponent implements OnInit, OnDestroy {
       map(data => data?.columns)
     )
 
-    this.isTaskEditable = this.appService.onEdit();
+    this.isTaskEditable = this.appService.getEditState();
     console.log('is editable: ', this.isTaskEditable);
     
     if (this.isTaskEditable) {

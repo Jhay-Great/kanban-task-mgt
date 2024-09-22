@@ -1,10 +1,10 @@
 
-<div class="background" (click)="isTaskEditable ? removeModal() : cancelModal()">
+<div class="background" (click)="isTaskEditable ? cancelModal() : removeModal()">
     
 </div>
 <section class="form-container">
     <h2>
-        {{ isTaskEditable ? 'Add New Task' : 'Edit Task' }}
+        {{ isTaskEditable ? 'Edit Task' : 'Add New Task' }}
     </h2>
     
     <form [formGroup]="taskForm" (ngSubmit)="createTask()">
