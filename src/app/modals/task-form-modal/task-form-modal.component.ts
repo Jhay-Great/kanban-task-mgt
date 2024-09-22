@@ -38,11 +38,8 @@ export class TaskFormModalComponent implements OnInit, OnDestroy {
     )
 
     this.isTaskEditable = this.appService.getEditState();
-    console.log('is editable: ', this.isTaskEditable);
     
     if (this.isTaskEditable) {
-      console.log('new form')
-      
       this.appService.taskDetail$.pipe(
         filter(task => task !== null),
         map(task => {
@@ -56,7 +53,6 @@ export class TaskFormModalComponent implements OnInit, OnDestroy {
 
           task.subtasks.forEach(subtask => 
           (this.taskForm.get('subtask') as FormArray).push(
-            // this.fb.group({subtask: [subtask]}),
             this.fb.group({
               title: [subtask.title],
               isCompleted: [subtask.isComplete],
@@ -77,8 +73,6 @@ export class TaskFormModalComponent implements OnInit, OnDestroy {
         status: [''],
       });
     }
-
-    // getting the columns from the board
     
 
   }
