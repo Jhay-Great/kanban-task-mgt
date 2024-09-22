@@ -7,7 +7,7 @@
         {{ isTaskEditable ? 'Edit Task' : 'Add New Task' }}
     </h2>
     
-    <form [formGroup]="taskForm" (ngSubmit)="createTask()">
+    <form [formGroup]="taskForm" (ngSubmit)="isTaskEditable ? saveChanges() : createTask()">
         <section class="title">
             <label for="title">Title</label>
             <input type="text" placeholder="e.g. Take coffee break" formControlName="title">
@@ -22,7 +22,7 @@
             <label for="subtask-label">
                 Subtasks
             </label>
-            <div class="subtask-container" formArrayName="subtask">
+            <div class="subtask-container" formArrayName="subtasks">
                 @for (subTask of subTaskArray.controls; track $index) {
                     <div [formGroupName]="$index">
                         <input type="text" formControlName="title">

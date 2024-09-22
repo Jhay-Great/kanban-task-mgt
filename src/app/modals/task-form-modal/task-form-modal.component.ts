@@ -48,11 +48,13 @@ export class TaskFormModalComponent implements OnInit, OnDestroy {
             title: [task.title], 
             description: [task.description],
             status: [task.status],
-            subtask: this.fb.array([]),
+            subtasks: this.fb.array([]),
           })
 
-          task.subtasks.forEach(subtask => 
-          (this.taskForm.get('subtask') as FormArray).push(
+          console.log('logging task: ', task);
+
+          task.subtasks?.forEach(subtask => 
+          (this.taskForm.get('subtasks') as FormArray).push(
             this.fb.group({
               title: [subtask.title],
               isCompleted: [subtask.isComplete],
@@ -69,7 +71,7 @@ export class TaskFormModalComponent implements OnInit, OnDestroy {
       this.taskForm = this.fb.group({
         title: ['', Validators.required],
         description: [''],
-        subtask: this.fb.array([]),
+        subtasks: this.fb.array([]),
         status: [''],
       });
     }
@@ -82,7 +84,7 @@ export class TaskFormModalComponent implements OnInit, OnDestroy {
   }
 
   get subTaskArray () {
-    return this.taskForm.get('subtask') as  FormArray;
+    return this.taskForm.get('subtasks') as  FormArray;
   }
 
   // get statusArray () {
@@ -151,6 +153,10 @@ export class TaskFormModalComponent implements OnInit, OnDestroy {
 
   cancelModal () {
     this.appService.hideTaskEditableForm();
+  }
+
+  saveChanges () {
+    console.log('called...');
   }
   
 
