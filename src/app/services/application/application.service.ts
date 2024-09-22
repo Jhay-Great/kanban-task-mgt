@@ -73,6 +73,7 @@ export class ApplicationService {
   }
   // toggles task form
   toggleTaskModal () {
+    this.isTaskEditable = false;
     this.taskIsActive = !this.taskIsActive;
     this.taskFormSubject$.next(this.taskIsActive)
   }
@@ -97,19 +98,23 @@ export class ApplicationService {
   }
 
   onEdit () {
+    console.log('logging editability status before reassigning: ', this.isTaskEditable);
     this.isTaskEditable = !this.isTaskEditable;
+    console.log('logging editability status after reassigning: ', this.isTaskEditable);
+    // return this.isTaskEditable = !this.isTaskEditable;
+    return this.isTaskEditable;
   }
 
   hideTaskEditableForm () {
     this.toggleTaskModal();
     this.toggleSelectedTask();
   }
-
+  
   populateTaskForm () {
     this.hideTaskEditableForm();
-    // this.toggleTaskModal(); // to display task form
-    // this.toggleSelectedTask();
-    // this.onEdit(); // for populating form
+    console.log('about to call onEdit func..')
+    this.onEdit(); // for populating form
+    // this.isTaskEditable = true;
     this.taskFormSubject.next(this.taskDetail);
   }
 }

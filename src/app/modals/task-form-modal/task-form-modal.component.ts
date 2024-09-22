@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../../model/AppState';
 import { ActivatedRoute } from '@angular/router';
 import { selectColumns } from '../../state/board/board.selector';
-import { map, Observable, take, tap } from 'rxjs';
+import { filter, map, Observable, take, tap } from 'rxjs';
 import { ApplicationService } from '../../services/application/application.service';
 import { IBoard, IColumns, ITask } from '../../model/board.interface';
 import { AsyncPipe } from '@angular/common';
@@ -22,7 +22,7 @@ export class TaskFormModalComponent implements OnInit, OnDestroy {
 
   taskForm!: FormGroup;
   boardIsActive:boolean = false;
-  isTaskEditable:boolean = false;
+  isTaskEditable!:boolean;
   boardStatus$!: Observable<IColumns[] | undefined>;
 
   constructor (
@@ -33,18 +33,52 @@ export class TaskFormModalComponent implements OnInit, OnDestroy {
   ) {};
 
   ngOnInit(): void {
-    this.taskForm = this.fb.group({
-      title: ['', Validators.required],
-      description: [''],
-      subtask: this.fb.array([]),
-      status: [''],
-      // status: this.fb.array([]),
-    });
-
-    // getting the columns from the board
     this.boardStatus$ = this.appService.selectedBoard$.pipe(
       map(data => data?.columns)
     )
+
+    this.isTaskEditable = this.appService.onEdit();
+    console.log('is editable: ', this.isTaskEditable);
+    
+    if (this.isTaskEditable) {
+      console.log('new form')
+      
+      this.appService.taskDetail$.pipe(
+        filter(task => task !== null),
+        map(task => {
+          if (task === null) return;
+          this.taskForm = this.fb.group({
+            title: [task.title], 
+            description: [task.description],
+            status: [task.status],
+            subtask: this.fb.array([]),
+          })
+
+          task.subtasks.forEach(subtask => 
+          (this.taskForm.get('subtask') as FormArray).push(
+            // this.fb.group({subtask: [subtask]}),
+            this.fb.group({
+              title: [subtask.title],
+              isCompleted: [subtask.isComplete],
+            })
+          )
+          )
+
+        }
+
+          
+        )
+      ).subscribe();
+    } else {
+      this.taskForm = this.fb.group({
+        title: ['', Validators.required],
+        description: [''],
+        subtask: this.fb.array([]),
+        status: [''],
+      });
+    }
+
+    // getting the columns from the board
     
 
   }

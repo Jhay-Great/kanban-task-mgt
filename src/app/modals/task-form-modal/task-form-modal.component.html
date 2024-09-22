@@ -4,7 +4,7 @@
 </div>
 <section class="form-container">
     <h2>
-        Add New Task
+        {{ isTaskEditable ? 'Add New Task' : 'Edit Task' }}
     </h2>
     
     <form [formGroup]="taskForm" (ngSubmit)="createTask()">
