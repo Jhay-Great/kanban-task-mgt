@@ -34,7 +34,8 @@ app-root {
         grid-area: nav;
 
         @media screen and (min-width: 760px) {
-            grid-column: 2/3;
+            // grid-column: 2/3;
+            grid-column: 2/6;
         }
     }
 
@@ -49,6 +50,8 @@ app-root {
         
         @media screen and (min-width: 760px) {
             display: block; //NOTE: displays the side bar on large screens
+            grid-column: 1 / 2;
+            grid-row: 1/-1;
         }
     
     }
@@ -67,6 +70,10 @@ app-root {
         justify-content: center;
         align-items: center;
         padding: 1rem 0;
+
+        @media screen and (min-width: 760px) {
+            grid-column: 2 / 6;
+        }
     }
 
     .empty-board {
