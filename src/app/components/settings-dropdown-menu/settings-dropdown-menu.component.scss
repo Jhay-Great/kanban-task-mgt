@@ -1,0 +1,30 @@
+@use '../../../sass/variables' as var;
+@use '../../../sass/mixins' as mix;
+@use '../../../sass/functions' as func;
+
+
+.settings {
+    position: absolute;
+    top: func.pixelsToRem(60);
+    right: func.pixelsToRem(5);
+    @include mix.flex(column);
+    width: func.pixelsToRem(180);
+    padding: 1.5rem 1rem;
+    background-color: var.$color-white;
+    box-shadow: 0 0 10px 5px func.addTransparency(var.$color-dark-gray-v1, 20%);
+    border-radius: func.pixelsToRem(8);
+
+    button {
+        @include mix.button-fonts(13, bold);
+        padding: .2rem 0;
+        &.edit-board {
+            color: var.$color-medium-gray;
+        }
+
+        &.delete-board {
+            color: var.$color-red;
+        }
+
+    }
+
+}
