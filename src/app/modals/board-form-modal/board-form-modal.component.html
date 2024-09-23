@@ -8,31 +8,33 @@
   </h2>
   
   <form [formGroup]="form" (ngSubmit)="isEditable ? saveChanges() : submit()">
-    <div class="name">
+    <section class="name">
       <label for="name">Name</label>
       <input type="text" formControlName="name" />
-    </div>
+    </section>
   
-    <div class="columns">
+    <section class="columns">
       <label for="column-name"> Columns </label>
       <div class="columns-container" formArrayName="columns">
         @for (column of columnFormArray.controls; track $index) {
         <div class="column" [formGroupName]="$index">
           <input type="text" formControlName="name" id="column-{{ $index }}" />
-          <button type="button" (click)="removeColumn($index)">x</button>
+          <button type="button" (click)="removeColumn($index)">
+            <img src="../../../assets/svgs/icon-cross.svg" alt="cancel button for the subtask">
+          </button>
         </div>
         }
       </div>
-    </div>
+    </section>
   
-    <div class="btns">
+    <section class="btns">
       <button type="button" class="add-new-column" (click)="addColumns()">
         + Add New Column
       </button>
       <button type="submit" class="create-new-board">
         {{ isEditable ? "Save Changes" : "Create New Board" }}
       </button>
-    </div>
+    </section>
   </form>
 
 </section>

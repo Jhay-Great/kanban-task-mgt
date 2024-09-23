@@ -1,6 +1,7 @@
 @use '../../../sass/mixins' as mix;
 @use '../../../sass/variables' as var;
 @use '../../../sass/functions' as func;
+@use '../../../sass/select-dropdown' as select-dropdown;
 
 form {
     @include mix.form();
@@ -38,5 +39,9 @@ form {
         &:hover {
             @include mix.primary-button-idle-hover;
         }
+    }
+
+    .status-container {
+        @include select-dropdown.custom-select;
     }
 }
