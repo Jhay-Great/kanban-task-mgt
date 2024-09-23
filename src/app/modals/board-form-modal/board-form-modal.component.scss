@@ -2,12 +2,9 @@
 @use '../../../sass/mixins' as mix;
 @use '../../../sass/functions' as func;
 
-.create-new-board {
-    // @include mix.add-button-primary(30, 0);
+h2 {
+    @include mix.headerL();
 }
-// .add-new-column {
-//     @include mix.add-button-secondary;
-// }
 
 form {
     @include mix.form();
@@ -18,7 +15,7 @@ form {
 
     .columns-container {
         @include mix.flex(column);
-        
+
         .column {
             @include mix.flex();
         }

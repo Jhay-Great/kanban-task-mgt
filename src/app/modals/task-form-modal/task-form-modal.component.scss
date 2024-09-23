@@ -3,6 +3,10 @@
 @use '../../../sass/functions' as func;
 @use '../../../sass/select-dropdown' as select-dropdown;
 
+h2 {
+    @include mix.headerL();
+}
+
 form {
     @include mix.form();
 
