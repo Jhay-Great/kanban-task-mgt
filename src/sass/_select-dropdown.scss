@@ -1,50 +1,62 @@
-@mixin select {
-    -webkit-appearance:none;
-    -moz-appearance:none;
-    -ms-appearance:none;
-    appearance:none;
-    outline:0;
-    box-shadow:none;
-    border:0!important;
-    background: #5c6664;
-    background-image: none;
-    flex: 1;
-    padding: 0 .5em;
-    color:#fff;
-    cursor:pointer;
-    font-size: 1em;
-    font-family: 'Open Sans', sans-serif;
+@use './variables' as var;
+@use './mixins' as mix;
+@use './functions' as func;
+// @use "../../../sass/select-dropdown" as select;
+// @use "../../../sass/custom-checkbox" as checkbox;
 
-    &::-ms-expand {
-       display: none;
-    }
- }
- @mixin select-inner {
-    position: relative;
-    display: flex;
-    width: 20em;
-    height: 3em;
-    line-height: 3;
-    background: #5c6664;
-    overflow: hidden;
-    border-radius: .25em;
+// @mixin select {
+//     -webkit-appearance:none;
+//     -moz-appearance:none;
+//     -ms-appearance:none;
+//     appearance:none;
+//     outline:0;
+//     box-shadow:none;
+//     // background: #5c6664;
+//     background-image: none;
+//     flex: 1;
+//     padding: 0 .5em;
+//     // color:#fff;
+//     cursor:pointer;
+//     // font-size: 1em;
+//     // font-family: 'Open Sans', sans-serif;
 
-    &::after {
-       content: '\25BC';
-       position: absolute;
-       top: 0;
-       right: 0;
-       padding: 0 1em;
-       background: #2b2e2e;
-       cursor:pointer;
-       pointer-events:none;
-       transition:.25s all ease;
-    }
+//     background: transparent;
+//     /* outline: 1px solid black; */
+//     width: 100%;
+//     color: var.$color-black;
+    
 
-    &:hover::after {
-       color: #23b499;
-    }
- }
+//     &::-ms-expand {
+//        display: none;
+//     }
+//  }
+//  @mixin select-inner {
+//     position: relative;
+//     display: flex;
+//     // width: 20em;
+//     // height: 3em;
+//     line-height: 3;
+//     background: #5c6664;
+//     overflow: hidden;
+//     border-radius: .25em;
+
+//     &::after {
+//        content: '\25BC';
+//        position: absolute;
+//        top: 0;
+//        right: 0;
+//        padding: 0 1em;
+//        background: #2b2e2e;
+//        cursor:pointer;
+//        pointer-events:none;
+//        transition:.25s all ease;
+//     }
+
+//     &:hover::after {
+//        color: #23b499;
+//     }
+//  }
+
 
 
 
@@ -52,114 +64,114 @@
 
 
  
-.select-box {
-  position: relative;
-  display: block;
-  width: 100%;
-  margin: 0 auto;
-  font-family: 'Open Sans', 'Helvetica Neue', 'Segoe UI', 'Calibri', 'Arial', sans-serif;
-  font-size: 18px;
-  color: #60666d;
+// .select-box {
+//   position: relative;
+//   display: block;
+//   width: 100%;
+//   margin: 0 auto;
+//   font-family: 'Open Sans', 'Helvetica Neue', 'Segoe UI', 'Calibri', 'Arial', sans-serif;
+//   font-size: 18px;
+//   color: #60666d;
   
-  @media (min-width: 768px) {
-    width: 70%;
-  }
+//   @media (min-width: 768px) {
+//     width: 70%;
+//   }
   
-  @media (min-width: 992px) {
-    width: 50%;
-  }
+//   @media (min-width: 992px) {
+//     width: 50%;
+//   }
   
-  @media (min-width: 1200px) {
-    width: 30%;
-  }
+//   @media (min-width: 1200px) {
+//     width: 30%;
+//   }
   
-  &__current {
-    position: relative;
-    box-shadow: 0 15px 30px -10px transparentize(#000, 0.9);
-    cursor: pointer;
-    outline: none;
+//   &__current {
+//     position: relative;
+//     box-shadow: 0 15px 30px -10px transparentize(#000, 0.9);
+//     cursor: pointer;
+//     outline: none;
     
-    &:focus {
-      & + .select-box__list {
-        opacity: 1;
+//     &:focus {
+//       & + .select-box__list {
+//         opacity: 1;
 
-        // We have to set "animation-name: none;" to make the list visible (read below how it works)
+//         // We have to set "animation-name: none;" to make the list visible (read below how it works)
 
-        animation-name: none;
+//         animation-name: none;
         
-        .select-box__option {
-          cursor: pointer;
-        }
-      }
+//         .select-box__option {
+//           cursor: pointer;
+//         }
+//       }
       
-      .select-box__icon {
-        transform: translateY(-50%) rotate(180deg);
-      }
-    }
-  }
+//       .select-box__icon {
+//         transform: translateY(-50%) rotate(180deg);
+//       }
+//     }
+//   }
   
-  &__icon {
-    position: absolute;
-    top: 50%;
-    right: 15px;
-    transform: translateY(-50%);
-    width: 20px;
-    opacity: 0.3;
-    transition: 0.2s ease;
-  }
+//   &__icon {
+//     position: absolute;
+//     top: 50%;
+//     right: 15px;
+//     transform: translateY(-50%);
+//     width: 20px;
+//     opacity: 0.3;
+//     transition: 0.2s ease;
+//   }
   
-  &__value {
-    display: flex;
-  }
+//   &__value {
+//     display: flex;
+//   }
   
-  &__input {
-    display: none;
+//   &__input {
+//     display: none;
     
-    &:checked + .select-box__input-text {
-      display: block;
-    }
-  }
+//     &:checked + .select-box__input-text {
+//       display: block;
+//     }
+//   }
   
-  &__input-text {
-    display: none;
-    width: 100%;
-    margin: 0;
-    padding: 15px;
-    background-color: #fff;
-  }
+//   &__input-text {
+//     display: none;
+//     width: 100%;
+//     margin: 0;
+//     padding: 15px;
+//     background-color: #fff;
+//   }
   
-  &__list {
-    position: absolute;
-    width: 100%;
-    padding: 0;
-    list-style: none;
-    opacity: 0;
+//   &__list {
+//     position: absolute;
+//     width: 100%;
+//     padding: 0;
+//     list-style: none;
+//     opacity: 0;
     
-    // We need to use animation with delay.
-    // Otherwise the click event will not have time to run on label, because this element disapears immediately when .select-box__current element loses the focus.
-    // This delay will not be noticed because we set "opacity" to "0".
-    // We also use "animation-fill-mode: forwards" to make the list stay hidden.
+//     // We need to use animation with delay.
+//     // Otherwise the click event will not have time to run on label, because this element disapears immediately when .select-box__current element loses the focus.
+//     // This delay will not be noticed because we set "opacity" to "0".
+//     // We also use "animation-fill-mode: forwards" to make the list stay hidden.
     
-    animation-name: HideList;
-    animation-duration: 0.5s;
-    animation-delay: 0.5s;
-    animation-fill-mode: forwards;
-    animation-timing-function: step-start;
-    box-shadow: 0 15px 30px -10px transparentize(#000, 0.9);
-  }
+//     animation-name: HideList;
+//     animation-duration: 0.5s;
+//     animation-delay: 0.5s;
+//     animation-fill-mode: forwards;
+//     animation-timing-function: step-start;
+//     box-shadow: 0 15px 30px -10px transparentize(#000, 0.9);
+//   }
   
-  &__option {
-    display: block;
-    padding: 15px;
-    background-color: #fff;
+//   &__option {
+//     display: block;
+//     padding: 15px;
+//     background-color: #fff;
     
-    &:hover,
-    &:focus {
-      color: #546c84;
-      background-color: #fbfbfb;
-    }
-  }
-}
+//     &:hover,
+//     &:focus {
+//       color: #546c84;
+//       background-color: #fbfbfb;
+//     }
+//   }
+// }
 
 // @keyframes HideList {
 //   from {

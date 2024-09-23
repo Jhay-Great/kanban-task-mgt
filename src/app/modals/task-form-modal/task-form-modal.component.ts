@@ -186,12 +186,7 @@ export class TaskFormModalComponent implements OnInit, OnDestroy {
             
            }
         })
-        // create the new board here
-        // const updatedBoard = {
-        //   id,
-        //   name,
-        //   column,
-        // }
+        
         const updatedBoard = {
           id,
           name,

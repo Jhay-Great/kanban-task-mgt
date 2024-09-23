@@ -1,0 +1,42 @@
+@use '../../../sass/mixins' as mix;
+@use '../../../sass/variables' as var;
+@use '../../../sass/functions' as func;
+
+form {
+    @include mix.form();
+
+    label {
+        @include mix.bodyM(var.$color-medium-gray);
+    }
+
+    .add-new-subtask {
+        @include mix.secondary-button-idle;
+
+        &:hover {
+            @include mix.secondary-button-idle-hover;
+        }
+    }
+
+    .subtask-container {
+        @include mix.flex(column, .5);
+    }
+
+    .subtask {
+        @include mix.flex();
+    }
+
+    .create-new-task {
+        @include mix.primary-button-idle;
+        @include mix.bodyL(var.$color-white);
+        @include mix.flex();
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 1rem;
+        border-radius: func.pixelsToRem(30);
+
+        &:hover {
+            @include mix.primary-button-idle-hover;
+        }
+    }
+}

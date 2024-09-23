@@ -15,7 +15,8 @@
     
         <section class="description">
             <label for="description">Description</label>
-            <input type="text" placeholder="e.g. It's always good to take a break. This 15 minute break will recharge the batteries a little." formControlName="description">
+            <textarea name="description" cols="30" rows="5" id="description" placeholder="e.g. It's always good to take a break. This 15 minute break will recharge the batteries a little." formControlName="description"></textarea>
+            <!-- <input type="text" placeholder="e.g. It's always good to take a break. This 15 minute break will recharge the batteries a little." formControlName="description"> -->
         </section>
     
         <section class=" ">
@@ -24,10 +25,10 @@
             </label>
             <div class="subtask-container" formArrayName="subtasks">
                 @for (subTask of subTaskArray.controls; track $index) {
-                    <div [formGroupName]="$index">
+                    <div [formGroupName]="$index" class="subtask">
                         <input type="text" formControlName="title">
-                        <button (click)="removeSubTask($index)">
-                            x
+                        <button class="delete-subtask" (click)="removeSubTask($index)">
+                            <img src="../../../assets/svgs/icon-cross.svg" alt="cancel button for the subtask">
                         </button>
                     </div>
         
@@ -58,7 +59,7 @@
         </section> -->
     
         <div class="btns">
-            <button type="submit" class="create-new-Task">
+            <button type="submit" class="create-new-task">
                 Create Task
             </button>
         </div>

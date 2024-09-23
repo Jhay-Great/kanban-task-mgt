@@ -119,3 +119,61 @@
     }
 
 }
+
+
+// custom checkbox
+// div {
+//   display: flex;
+//   align-items: center;
+//   gap: 10px;
+
+//   input {
+//       width: 20px;
+//       height: 20px;
+//       appearance: none;
+//       border: 2px solid $bg-smoke-white;
+      
+//       position: relative;
+//       overflow: hidden;
+//       display: flex;
+//       justify-content: center;
+//       align-items: center;
+      
+//       &:hover {
+//           border: 2px solid $bg-secondary-color;
+//       }
+
+      
+//       cursor: pointer;
+
+//       &::after {
+//           content: '';
+//           background: url(../assets/icon-check.svg) center no-repeat;
+//           background-size: 11px;
+//           position: absolute;
+//           top: 0;
+//           width: inherit;
+//           height: inherit;
+//           aspect-ratio: 1;
+//           display: none;
+
+//       }
+
+//       &:checked {
+//           background: $bg-secondary-color;
+//           border: none;
+
+//           &::after {
+//               display: block;
+//           }
+//       }
+
+//       // &::-ms-check,
+//       // &:checked {
+//       //     accent-color: $bg-secondary-color;
+//       //     appearance: auto;
+
+//       // }
+      
+//   }
+// }

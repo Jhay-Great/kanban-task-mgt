@@ -53,11 +53,17 @@ header {
 
 
 }
+.subtask-container,
+.current-status-container {
+  @include mix.flex(column, .5);
+}
 .description {
   @include mix.bodyL(var.$color-medium-gray);
 }
-.subtask-title {
-  @include mix.bodyM(var.$color-medium-gray)
+.subtask-title,
+.current-status {
+  @include mix.bodyM(var.$color-medium-gray);
+  margin-bottom: func.pixelsToRem(8);
 }
 .cbx-lbl {
   @extend .subtask-title;
@@ -83,10 +89,17 @@ header {
 
 }
 
-select {
-  @include select.select;
-  @include select.select-inner;
+.checkbox-wrapper-52 {
+  background-color: var.$color-light-gray;
+  border-radius: func.pixelsToRem(4);
+  padding: func.pixelsToRem(13);
+  color: var.$color-black;
 }
+
+// select {
+//   @include select.select;
+//   @include select.select-inner;
+// }
 
 @include checkbox.custom-checkbox ;
 
