@@ -3,8 +3,8 @@
 @use './mixins' as mix;
 
 @mixin custom-checkbox {
-      width: 15px;
-      height: 15px;
+      width: 16px;
+      height: 16px;
       appearance: none;
       border: 1px solid func.addTransparency(var.$color-medium-gray, 25%);
       border-radius: func.pixelsToRem(2);
