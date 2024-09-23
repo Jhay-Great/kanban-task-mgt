@@ -59,6 +59,10 @@ export class BoardContainerComponent implements OnInit, OnDestroy {
     this.appService.toggleSelectedTask();
     this.appService.displayTaskDetail(task);
   }
+
+  displayBoardForm () {
+    this.appService.populateBoardForm();
+  }
 }
 
 

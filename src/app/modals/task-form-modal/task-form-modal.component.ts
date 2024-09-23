@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../../model/AppState';
 import { ActivatedRoute } from '@angular/router';
 import { selectColumns } from '../../state/board/board.selector';
-import { filter, map, Observable, take, tap } from 'rxjs';
+import { combineLatest, filter, map, Observable, take, tap } from 'rxjs';
 import { ApplicationService } from '../../services/application/application.service';
 import { IBoard, IColumns, ITask } from '../../model/board.interface';
 import { AsyncPipe } from '@angular/common';
@@ -53,13 +53,13 @@ export class TaskFormModalComponent implements OnInit, OnDestroy {
 
           console.log('logging task: ', task);
 
-          task.subtasks?.forEach(subtask => 
-          (this.taskForm.get('subtasks') as FormArray).push(
+          task.subtasks?.forEach((subtask, i) => 
+          ((this.taskForm.get('subtasks') as FormArray).push(
             this.fb.group({
-              title: [subtask.title],
-              isCompleted: [subtask.isComplete],
+              title: [subtask.title], 
+              isCompleted: [subtask.isCompleted],
             })
-          )
+          ), console.log('logging the order of the subtasks: ', subtask.isCompleted, i))
           )
 
         }
@@ -86,11 +86,7 @@ export class TaskFormModalComponent implements OnInit, OnDestroy {
   get subTaskArray () {
     return this.taskForm.get('subtasks') as  FormArray;
   }
-
-  // get statusArray () {
-  //   return this.taskForm.get('status') as FormArray;
-  // }
-
+  
   addSubTask (): void {
     const element = this.fb.group({
       title: ['', Validators.required],
@@ -104,6 +100,7 @@ export class TaskFormModalComponent implements OnInit, OnDestroy {
   }
 
   removeSubTask (index:number) {
+    console.log('index no.: ', index);
     this.subTaskArray.removeAt(index)
   }
   
@@ -156,7 +153,84 @@ export class TaskFormModalComponent implements OnInit, OnDestroy {
   }
 
   saveChanges () {
-    console.log('called...');
+    const taskForm = this.taskForm;
+    
+    if (taskForm.invalid) {
+      console.log('invalid form');
+      return;
+    }
+    
+    const data = taskForm.value;
+    console.log(data);
+
+    const initialTask = this.appService.taskDetail$;
+    const boardData = this.appService.selectedBoard$;
+
+    combineLatest([boardData, initialTask]).pipe(
+      take(1),
+      filter(([board, task]) => (board !== null || task !== null)),
+      map(([boardData, task]) => {
+        if (boardData === null || task === null) return;
+        const { id } = boardData;
+        const { name } = boardData;
+        const columns = boardData.columns.map(column => {
+          return { 
+            ...column,
+            // removes the selected task from the task array
+            tasks: column.tasks.filter(taskDetail => (
+              taskDetail.title !== task.title
+            )),
+            
+           }
+        })
+        
+        const updatedBoard = {
+          id,
+          name,
+          columns, 
+        }
+        console.log('updated board: ', updatedBoard);
+
+        // inserts the new data into the board
+        const newBoard = {
+          ...updatedBoard,
+          // columns: updateBoard
+          columns: updatedBoard.columns.map(column => {
+            if (column.name === data.status) {
+              return {
+                ...column,
+                tasks: [...column.tasks, data]
+                
+              }
+            } else {
+              return column;
+            }
+            
+          })
+        }
+        // console.log('new board data: ', newBoard);
+
+        return newBoard;
+
+
+        
+      })
+    ).subscribe(
+      value => {
+        if (value === null || value === undefined) return;
+
+        const update:Update<IBoard> = {
+          id: value.id,
+          changes: {
+            ...value
+          }
+        };
+
+        this.store.dispatch(updateBoard({ update }))
+      }
+    ); 
+    
+    console.log('would be dispatching soon...');
   }
   
 

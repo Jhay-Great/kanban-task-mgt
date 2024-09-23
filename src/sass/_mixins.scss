@@ -35,7 +35,7 @@
 }
 
 @mixin bodyL ($color:var.$color-black) {
-    @include font-default(medium);
+    @include font-default(bold);
     font-size: func.pixelsToRem(13);
     line-height: func.pixelsToRem(23);
     color: $color;
@@ -68,11 +68,17 @@
 @mixin primary-button-idle {
     background-color: var.$color-main-purple;
     color: var.$color-white;
+
 }
 
 @mixin secondary-button-idle {
-    background-color: func.addTransparency(var.$color-main-purple, 10);
-    color: var.$color-main-purple;
+    background-color: func.addTransparency(var.$color-main-purple, 10%);
+    // color: var.$color-main-purple;
+    border-radius: func.pixelsToRem(30);
+    padding: 1rem;
+    @include flex();
+    justify-content: center;
+    @include bodyL(var.$color-main-purple);
 
 }
 
@@ -165,11 +171,6 @@
     }
 }
 
-// @mixin modal {
-//     position: absolute;
-    
-// }
-
 
 @mixin modal {
     position: absolute;
@@ -221,6 +222,36 @@
       
     }
 }
+
+@mixin form () {
+    
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-height: 400px;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+
+    & > section {
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+
+        input, textarea {
+            padding: 1rem;
+            border: 1px solid func.addTransparency(var.$color-medium-gray, 25%);
+            border-radius: 4px;
+            width: 100%;
+            @include bodyL()
+        }
+    }
+
+}
+
+
+
+
 
 // mobile
 // app-root {

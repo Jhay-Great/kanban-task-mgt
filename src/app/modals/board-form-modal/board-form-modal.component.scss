@@ -2,9 +2,46 @@
 @use '../../../sass/mixins' as mix;
 @use '../../../sass/functions' as func;
 
-.create-new-board {
-    @include mix.add-button-primary(30, 0);
+h2 {
+    @include mix.headerL();
 }
-.add-new-column {
-    @include mix.add-button-secondary;
+
+form {
+    @include mix.form();
+
+    label {
+        @include mix.bodyM(var.$color-medium-gray);
+    }
+
+    .columns-container {
+        @include mix.flex(column);
+
+        .column {
+            @include mix.flex();
+        }
+    }
+
+
+    .add-new-column {
+        @include mix.secondary-button-idle;
+
+        &:hover {
+            @include mix.secondary-button-idle-hover;
+        }
+    }
+
+    .create-new-board {
+        @include mix.primary-button-idle;
+        @include mix.bodyL(var.$color-white);
+        @include mix.flex();
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 1rem;
+        border-radius: func.pixelsToRem(30);
+
+        &:hover {
+            @include mix.primary-button-idle-hover;
+        }
+    }
 }
