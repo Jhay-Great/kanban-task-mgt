@@ -53,13 +53,13 @@ export class TaskFormModalComponent implements OnInit, OnDestroy {
 
           console.log('logging task: ', task);
 
-          task.subtasks?.forEach(subtask => 
-          (this.taskForm.get('subtasks') as FormArray).push(
+          task.subtasks?.forEach((subtask, i) => 
+          ((this.taskForm.get('subtasks') as FormArray).push(
             this.fb.group({
-              title: [subtask.title],
-              isCompleted: [subtask.isComplete],
+              title: [subtask.title], 
+              isCompleted: [subtask.isCompleted],
             })
-          )
+          ), console.log('logging the order of the subtasks: ', subtask.isCompleted, i))
           )
 
         }
@@ -86,11 +86,7 @@ export class TaskFormModalComponent implements OnInit, OnDestroy {
   get subTaskArray () {
     return this.taskForm.get('subtasks') as  FormArray;
   }
-
-  // get statusArray () {
-  //   return this.taskForm.get('status') as FormArray;
-  // }
-
+  
   addSubTask (): void {
     const element = this.fb.group({
       title: ['', Validators.required],
@@ -104,6 +100,7 @@ export class TaskFormModalComponent implements OnInit, OnDestroy {
   }
 
   removeSubTask (index:number) {
+    console.log('index no.: ', index);
     this.subTaskArray.removeAt(index)
   }
   

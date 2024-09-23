@@ -66,7 +66,7 @@ export class SelectedTaskComponent implements OnInit {
         // Ensure subtasks exist, otherwise return 0
         return task?.subtasks
           ? task.subtasks.reduce((count, subtask) => {
-              return subtask.isComplete ? count + 1 : count;
+              return subtask.isCompleted ? count + 1 : count;
             }, 0)  // Start counting from 0
           : 0;  // Return 0 if task or subtasks are undefined
       }),
