@@ -73,6 +73,7 @@ header {
   background-color: var.$color-light-gray;
   border-radius: func.pixelsToRem(4);
   padding: func.pixelsToRem(12);
+  align-items: center;
 
   &:hover {
     background-color: func.addTransparency(var.$color-main-purple, 25%);
@@ -80,6 +81,7 @@ header {
 
   label {
     @extend .subtask-title;
+    margin: 0;
     color: var.$color-black;
 
     &:active {
@@ -96,12 +98,11 @@ header {
   color: var.$color-black;
 }
 
-// select {
-//   @include select.select;
-//   @include select.select-inner;
-// }
 
-@include checkbox.custom-checkbox ;
+input {
+  @include checkbox.custom-checkbox;
+
+}
 
 
 

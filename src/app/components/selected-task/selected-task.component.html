@@ -47,7 +47,7 @@
     
         <!-- loop through to get the data -->
         @for (subtask of (task | async)?.subtasks; track $index) {
-            <div class="checkbox-wrapper-52">
+            <!-- <div class="checkbox-wrapper-52">
                 <label for="todo-{{$index}}" class="item">
                   <input type="checkbox" id="todo-{{$index}}" class="hidden"/>
                   <label for="todo-{{$index}}" class="cbx">      
@@ -57,12 +57,12 @@
                   </label>
                   <label for="todo-{{$index}}" class="cbx-lbl">{{subtask.title}}</label>
                 </label>
-            </div>
-            
-            <!-- <div class="subtask">
-                <input type="checkbox" name="" id="is-complete">
-                <label for="is-complete">{{ subtask.title }}</label>
             </div> -->
+            
+            <div class="subtask">
+                <input type="checkbox" name="" id="is-completed">
+                <label for="is-completed">{{ subtask.title }}</label>
+            </div>
     
         }
 
