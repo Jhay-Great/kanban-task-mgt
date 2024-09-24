@@ -22,7 +22,7 @@ export class NavComponent {
   ) {}
 
   addTask(): void {
-    this.appService.toggleTaskModal();
+    this.appService.toggleTaskModal(); // displays task form modal
   }
 
   toggleSettingsMenu() {

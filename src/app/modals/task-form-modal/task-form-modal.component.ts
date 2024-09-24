@@ -141,6 +141,7 @@ export class TaskFormModalComponent implements OnInit, OnDestroy {
       
       this.store.dispatch(updateBoard({ update }));
     });
+    this.appService.toggleTaskModal(); // hides task form modal
   }
 
   removeModal () {
@@ -231,6 +232,7 @@ export class TaskFormModalComponent implements OnInit, OnDestroy {
     ); 
     
     console.log('would be dispatching soon...');
+    this.appService.toggleTaskModal(); // hides task form modal
   }
   
 
