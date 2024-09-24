@@ -127,6 +127,7 @@ export class BoardFormModalComponent implements OnInit, OnDestroy {
     console.log('logging new board form: ', board);
     this.store.dispatch(createBoard({ board }));
     this.clearForm();
+    this.appService.toggleBoardModal(); // hiding modal
   }
 
   saveChanges () {
