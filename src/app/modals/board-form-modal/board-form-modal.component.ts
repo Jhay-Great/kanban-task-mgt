@@ -154,22 +154,7 @@ export class BoardFormModalComponent implements OnInit, OnDestroy {
 
     console.log('looping based of the form value: ', loopingFrom);
     
-    // initial logic: updates the nested object
-    // const updateBoardName = form.value.name || this.boardData.name;
-    // const updatedData = {columns: this.boardData.columns.map(
-    //   (column, index) => {
-    //     const updatedColumnName = form.value.columns[index].name;
-    //     return {
-    //       name: updatedColumnName || column.name,
-    //       tasks: column.tasks,
-    //     }
-    //   }
-    // )}
-
-    // const boardUpdate = {
-    //   name: updateBoardName,
-    //   ...updatedData,
-    // }
+    
     // updated board object
     const boardUpdate = {
       ...loopingFrom,
@@ -184,7 +169,7 @@ export class BoardFormModalComponent implements OnInit, OnDestroy {
     
 
     this.store.dispatch(updateBoard({ update }));
-
+    this.appService.toggleBoardModal(); // hiding modal
 
     // console.log('updated form value: ', update)
   }
